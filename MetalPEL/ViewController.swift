@@ -8,18 +8,25 @@
 
 import UIKit
 
+
 class ViewController: UIViewController {
+
+    let camera = CameraController()
+    let videoView = VideoView(frame: CGRectZero)
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        view.addSubview(videoView)
+        
+        camera.delegate = videoView.videoBuffer
+        camera.running = true
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewDidLayoutSubviews() {
+        videoView.frame = view.bounds
+        videoView.drawableSize = CGSize(width: view.bounds.width * 2, height: view.bounds.height * 2)
+        print("frame: \(videoView.frame) drawableSize: \(videoView.drawableSize)")
     }
-
-
 }
 
