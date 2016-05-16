@@ -46,6 +46,9 @@ class VideoView:MTKView {
         } catch {
             fatalError("Unable to create pipeline state")
         }
+        
+        //let luminanceWeights: [Float] = [ 0.333, 0.334, 0.333 ]
+        //sobel = MPSImageSobel(device: device!, linearGrayColorTransform: luminanceWeights)
         sobel = MPSImageSobel(device: device!)
         blur = MPSImageGaussianBlur(device: device!, sigma: 2)
     }
@@ -79,7 +82,6 @@ class VideoView:MTKView {
         commandEncoder.setTexture(ytexture, atIndex: 0)
         commandEncoder.setTexture(cbcrTexture, atIndex: 1)
         commandEncoder.setTexture(workTexture, atIndex: 2) // work texture
-        commandEncoder.setTexture(drawable.texture, atIndex: 3) // out texture
         
         commandEncoder.dispatchThreadgroups(threadgroupsPerGrid, threadsPerThreadgroup: threadsPerThreadgroup)
         
