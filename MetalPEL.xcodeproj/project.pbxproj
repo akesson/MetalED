@@ -18,7 +18,8 @@
 		C33A68571CE8C14500484F76 /* YCbCrKernel.metal in Sources */ = {isa = PBXBuildFile; fileRef = C33A68561CE8C14500484F76 /* YCbCrKernel.metal */; };
 		C33A685A1CE8D7BC00484F76 /* VideoBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A68591CE8D7BC00484F76 /* VideoBuffer.swift */; };
 		C33A685C1CEA218600484F76 /* PELKernel.metal in Sources */ = {isa = PBXBuildFile; fileRef = C33A685B1CEA218600484F76 /* PELKernel.metal */; };
-		C33A685E1CEA235800484F76 /* PredictiveEdgeLinking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A685D1CEA235800484F76 /* PredictiveEdgeLinking.swift */; };
+		C33A685E1CEA235800484F76 /* ImagePEL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A685D1CEA235800484F76 /* ImagePEL.swift */; };
+		C33A68611CEA319500484F76 /* ImageYCbCr2RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A68601CEA319500484F76 /* ImageYCbCr2RGB.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +48,8 @@
 		C33A68561CE8C14500484F76 /* YCbCrKernel.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = YCbCrKernel.metal; sourceTree = "<group>"; };
 		C33A68591CE8D7BC00484F76 /* VideoBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoBuffer.swift; sourceTree = "<group>"; };
 		C33A685B1CEA218600484F76 /* PELKernel.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = PELKernel.metal; sourceTree = "<group>"; };
-		C33A685D1CEA235800484F76 /* PredictiveEdgeLinking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredictiveEdgeLinking.swift; sourceTree = "<group>"; };
+		C33A685D1CEA235800484F76 /* ImagePEL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePEL.swift; sourceTree = "<group>"; };
+		C33A68601CEA319500484F76 /* ImageYCbCr2RGB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageYCbCr2RGB.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +97,6 @@
 				C33A68511CE7B33C00484F76 /* CameraController.swift */,
 				C33A68531CE7BF9C00484F76 /* VideoView.swift */,
 				C33A68591CE8D7BC00484F76 /* VideoBuffer.swift */,
-				C33A685D1CEA235800484F76 /* PredictiveEdgeLinking.swift */,
 			);
 			path = MetalPEL;
 			sourceTree = "<group>";
@@ -133,6 +134,8 @@
 		C33A685F1CEA2FE700484F76 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				C33A685D1CEA235800484F76 /* ImagePEL.swift */,
+				C33A68601CEA319500484F76 /* ImageYCbCr2RGB.swift */,
 				C33A68551CE8C12D00484F76 /* Kernels */,
 			);
 			name = Shaders;
@@ -239,13 +242,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C33A68611CEA319500484F76 /* ImageYCbCr2RGB.swift in Sources */,
 				C33A68541CE7BF9C00484F76 /* VideoView.swift in Sources */,
 				C33A68521CE7B33C00484F76 /* CameraController.swift in Sources */,
 				C33A685C1CEA218600484F76 /* PELKernel.metal in Sources */,
 				C33A68341CE7B17500484F76 /* ViewController.swift in Sources */,
 				C33A68571CE8C14500484F76 /* YCbCrKernel.metal in Sources */,
 				C33A68321CE7B17500484F76 /* AppDelegate.swift in Sources */,
-				C33A685E1CEA235800484F76 /* PredictiveEdgeLinking.swift in Sources */,
+				C33A685E1CEA235800484F76 /* ImagePEL.swift in Sources */,
 				C33A685A1CE8D7BC00484F76 /* VideoBuffer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -20,7 +20,8 @@ class VideoView:MTKView {
     
     var blur: MPSImageGaussianBlur!
     var sobel: MPSImageSobel!
-    var pel: PredictiveEdgeLinking!
+    var pel: ImagePEL!
+    var colorConvert: ImageYCbCr2RGB!
     
     let videoBuffer:VideoBuffer
     var workTexture1: MTLTexture?
@@ -53,7 +54,8 @@ class VideoView:MTKView {
         //sobel = MPSImageSobel(device: device!, linearGrayColorTransform: luminanceWeights)
         sobel = MPSImageSobel(device: device!)
         blur = MPSImageGaussianBlur(device: device!, sigma: 2)
-        pel = PredictiveEdgeLinking(device: device!)
+        pel = ImagePEL(device: device!)
+        colorConvert = ImageYCbCr2RGB(device: device!)
     }
     
     
@@ -79,21 +81,11 @@ class VideoView:MTKView {
         }
         
         let commandBuffer = commandQueue.commandBuffer()
-        let commandEncoder = commandBuffer.computeCommandEncoder()
-        
-        commandEncoder.setComputePipelineState(pipelineState)
-        
-        commandEncoder.setTexture(ytexture, atIndex: 0)
-        commandEncoder.setTexture(cbcrTexture, atIndex: 1)
-        commandEncoder.setTexture(workTexture1, atIndex: 2) // work texture
-        
-        commandEncoder.dispatchThreadgroups(threadgroupsPerGrid, threadsPerThreadgroup: threadsPerThreadgroup)
-        
-        commandEncoder.endEncoding()
         
         let inPlaceTexture = UnsafeMutablePointer<MTLTexture?>.alloc(1)
         inPlaceTexture.initialize(workTexture1)
         
+        colorConvert.encodeToCommandBuffer(commandBuffer, yTexture: ytexture, cbcrTexture: cbcrTexture, destinationTexture: workTexture1!)
         blur.encodeToCommandBuffer(commandBuffer, inPlaceTexture: inPlaceTexture, fallbackCopyAllocator: nil)
         sobel.encodeToCommandBuffer(commandBuffer, sourceTexture: workTexture1!, destinationTexture: workTexture2!)
         pel.encodeToCommandBuffer(commandBuffer, sourceTexture: workTexture2!, destinationTexture: drawable.texture)
