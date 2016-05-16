@@ -19,8 +19,10 @@ class VideoView:MTKView {
     var threadgroupsPerGrid: MTLSize!
     
     var blur: MPSImageGaussianBlur!
+    var sobel: MPSImageSobel!
     
     let videoBuffer:VideoBuffer
+    var workTexture: MTLTexture?
 
     override var drawableSize: CGSize {
         didSet {
@@ -44,13 +46,20 @@ class VideoView:MTKView {
         } catch {
             fatalError("Unable to create pipeline state")
         }
-        
-        blur = MPSImageGaussianBlur(device: device!, sigma: 0)
+        sobel = MPSImageSobel(device: device!)
+        blur = MPSImageGaussianBlur(device: device!, sigma: 2)
     }
     
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        if (workTexture == nil) {
+            let desc = MTLTextureDescriptor.texture2DDescriptorWithPixelFormat(MTLPixelFormat.BGRA8Unorm, width: Int(drawableSize.width), height: Int(drawableSize.height), mipmapped: false)
+            workTexture = device!.newTextureWithDescriptor(desc)
+        }
     }
     
     func setBlurSigma(sigma: Float) {
@@ -69,17 +78,18 @@ class VideoView:MTKView {
         
         commandEncoder.setTexture(ytexture, atIndex: 0)
         commandEncoder.setTexture(cbcrTexture, atIndex: 1)
-        commandEncoder.setTexture(drawable.texture, atIndex: 2) // out texture
+        commandEncoder.setTexture(workTexture, atIndex: 2) // work texture
+        commandEncoder.setTexture(drawable.texture, atIndex: 3) // out texture
         
         commandEncoder.dispatchThreadgroups(threadgroupsPerGrid, threadsPerThreadgroup: threadsPerThreadgroup)
         
         commandEncoder.endEncoding()
         
         let inPlaceTexture = UnsafeMutablePointer<MTLTexture?>.alloc(1)
-        inPlaceTexture.initialize(drawable.texture)
+        inPlaceTexture.initialize(workTexture)
         
         blur.encodeToCommandBuffer(commandBuffer, inPlaceTexture: inPlaceTexture, fallbackCopyAllocator: nil)
-        
+        sobel.encodeToCommandBuffer(commandBuffer, sourceTexture: workTexture!, destinationTexture: drawable.texture)
         commandBuffer.presentDrawable(drawable)
         
         commandBuffer.commit();
