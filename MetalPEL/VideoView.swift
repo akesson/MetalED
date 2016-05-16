@@ -20,9 +20,11 @@ class VideoView:MTKView {
     
     var blur: MPSImageGaussianBlur!
     var sobel: MPSImageSobel!
+    var pel: PredictiveEdgeLinking!
     
     let videoBuffer:VideoBuffer
-    var workTexture: MTLTexture?
+    var workTexture1: MTLTexture?
+    var workTexture2: MTLTexture?
 
     override var drawableSize: CGSize {
         didSet {
@@ -51,6 +53,7 @@ class VideoView:MTKView {
         //sobel = MPSImageSobel(device: device!, linearGrayColorTransform: luminanceWeights)
         sobel = MPSImageSobel(device: device!)
         blur = MPSImageGaussianBlur(device: device!, sigma: 2)
+        pel = PredictiveEdgeLinking(device: device!)
     }
     
     
@@ -59,9 +62,10 @@ class VideoView:MTKView {
     }
     
     override func layoutSubviews() {
-        if (workTexture == nil) {
+        if (workTexture1 == nil || workTexture2 == nil) {
             let desc = MTLTextureDescriptor.texture2DDescriptorWithPixelFormat(MTLPixelFormat.BGRA8Unorm, width: Int(drawableSize.width), height: Int(drawableSize.height), mipmapped: false)
-            workTexture = device!.newTextureWithDescriptor(desc)
+            workTexture1 = device!.newTextureWithDescriptor(desc)
+            workTexture2 = device!.newTextureWithDescriptor(desc)
         }
     }
     
@@ -81,17 +85,18 @@ class VideoView:MTKView {
         
         commandEncoder.setTexture(ytexture, atIndex: 0)
         commandEncoder.setTexture(cbcrTexture, atIndex: 1)
-        commandEncoder.setTexture(workTexture, atIndex: 2) // work texture
+        commandEncoder.setTexture(workTexture1, atIndex: 2) // work texture
         
         commandEncoder.dispatchThreadgroups(threadgroupsPerGrid, threadsPerThreadgroup: threadsPerThreadgroup)
         
         commandEncoder.endEncoding()
         
         let inPlaceTexture = UnsafeMutablePointer<MTLTexture?>.alloc(1)
-        inPlaceTexture.initialize(workTexture)
+        inPlaceTexture.initialize(workTexture1)
         
         blur.encodeToCommandBuffer(commandBuffer, inPlaceTexture: inPlaceTexture, fallbackCopyAllocator: nil)
-        sobel.encodeToCommandBuffer(commandBuffer, sourceTexture: workTexture!, destinationTexture: drawable.texture)
+        sobel.encodeToCommandBuffer(commandBuffer, sourceTexture: workTexture1!, destinationTexture: workTexture2!)
+        pel.encodeToCommandBuffer(commandBuffer, sourceTexture: workTexture2!, destinationTexture: drawable.texture)
         commandBuffer.presentDrawable(drawable)
         
         commandBuffer.commit();
