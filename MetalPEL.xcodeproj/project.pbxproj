@@ -15,9 +15,9 @@
 		C33A68471CE7B17500484F76 /* MetalPELTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A68461CE7B17500484F76 /* MetalPELTests.swift */; };
 		C33A68521CE7B33C00484F76 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A68511CE7B33C00484F76 /* CameraController.swift */; };
 		C33A68541CE7BF9C00484F76 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A68531CE7BF9C00484F76 /* VideoView.swift */; };
-		C33A68571CE8C14500484F76 /* YCbCrShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = C33A68561CE8C14500484F76 /* YCbCrShader.metal */; };
+		C33A68571CE8C14500484F76 /* YCbCrKernel.metal in Sources */ = {isa = PBXBuildFile; fileRef = C33A68561CE8C14500484F76 /* YCbCrKernel.metal */; };
 		C33A685A1CE8D7BC00484F76 /* VideoBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A68591CE8D7BC00484F76 /* VideoBuffer.swift */; };
-		C33A685C1CEA218600484F76 /* PELShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = C33A685B1CEA218600484F76 /* PELShader.metal */; };
+		C33A685C1CEA218600484F76 /* PELKernel.metal in Sources */ = {isa = PBXBuildFile; fileRef = C33A685B1CEA218600484F76 /* PELKernel.metal */; };
 		C33A685E1CEA235800484F76 /* PredictiveEdgeLinking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A685D1CEA235800484F76 /* PredictiveEdgeLinking.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,9 +44,9 @@
 		C33A68481CE7B17500484F76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C33A68511CE7B33C00484F76 /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		C33A68531CE7BF9C00484F76 /* VideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
-		C33A68561CE8C14500484F76 /* YCbCrShader.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = YCbCrShader.metal; sourceTree = "<group>"; };
+		C33A68561CE8C14500484F76 /* YCbCrKernel.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = YCbCrKernel.metal; sourceTree = "<group>"; };
 		C33A68591CE8D7BC00484F76 /* VideoBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoBuffer.swift; sourceTree = "<group>"; };
-		C33A685B1CEA218600484F76 /* PELShader.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = PELShader.metal; sourceTree = "<group>"; };
+		C33A685B1CEA218600484F76 /* PELKernel.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = PELKernel.metal; sourceTree = "<group>"; };
 		C33A685D1CEA235800484F76 /* PredictiveEdgeLinking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredictiveEdgeLinking.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,7 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				C33A68581CE8C56C00484F76 /* Resources */,
-				C33A68551CE8C12D00484F76 /* Shaders */,
+				C33A685F1CEA2FE700484F76 /* Shaders */,
 				C33A68331CE7B17500484F76 /* ViewController.swift */,
 				C33A68511CE7B33C00484F76 /* CameraController.swift */,
 				C33A68531CE7BF9C00484F76 /* VideoView.swift */,
@@ -109,13 +109,13 @@
 			path = MetalPELTests;
 			sourceTree = "<group>";
 		};
-		C33A68551CE8C12D00484F76 /* Shaders */ = {
+		C33A68551CE8C12D00484F76 /* Kernels */ = {
 			isa = PBXGroup;
 			children = (
-				C33A68561CE8C14500484F76 /* YCbCrShader.metal */,
-				C33A685B1CEA218600484F76 /* PELShader.metal */,
+				C33A68561CE8C14500484F76 /* YCbCrKernel.metal */,
+				C33A685B1CEA218600484F76 /* PELKernel.metal */,
 			);
-			name = Shaders;
+			name = Kernels;
 			sourceTree = "<group>";
 		};
 		C33A68581CE8C56C00484F76 /* Resources */ = {
@@ -128,6 +128,14 @@
 				C33A683D1CE7B17500484F76 /* Info.plist */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		C33A685F1CEA2FE700484F76 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				C33A68551CE8C12D00484F76 /* Kernels */,
+			);
+			name = Shaders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,9 +241,9 @@
 			files = (
 				C33A68541CE7BF9C00484F76 /* VideoView.swift in Sources */,
 				C33A68521CE7B33C00484F76 /* CameraController.swift in Sources */,
-				C33A685C1CEA218600484F76 /* PELShader.metal in Sources */,
+				C33A685C1CEA218600484F76 /* PELKernel.metal in Sources */,
 				C33A68341CE7B17500484F76 /* ViewController.swift in Sources */,
-				C33A68571CE8C14500484F76 /* YCbCrShader.metal in Sources */,
+				C33A68571CE8C14500484F76 /* YCbCrKernel.metal in Sources */,
 				C33A68321CE7B17500484F76 /* AppDelegate.swift in Sources */,
 				C33A685E1CEA235800484F76 /* PredictiveEdgeLinking.swift in Sources */,
 				C33A685A1CE8D7BC00484F76 /* VideoBuffer.swift in Sources */,

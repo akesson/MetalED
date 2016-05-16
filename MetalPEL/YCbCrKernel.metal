@@ -1,5 +1,5 @@
 //
-//  YCbCrShader.metal
+//  YCbCrKernel.metal
 //  MetalPEL
 //
 //  Created by Henrik Akesson on 15/05/2016.
@@ -11,7 +11,7 @@ using namespace metal;
 
 
 
-kernel void YCbCrColorConversion(texture2d<float, access::read> yTexture [[texture(0)]],
+kernel void YCbCr2RGB(texture2d<float, access::read> yTexture [[texture(0)]],
                                  texture2d<float, access::read> cbcrTexture [[texture(1)]],
                                  texture2d<float, access::write> outTexture [[texture(2)]],
                                  uint2 gid [[thread_position_in_grid]])

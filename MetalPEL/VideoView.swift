@@ -41,7 +41,7 @@ class VideoView:MTKView {
         defaultLibrary = device!.newDefaultLibrary()!
         commandQueue = device!.newCommandQueue()
         
-        let kernelFunction = defaultLibrary.newFunctionWithName("YCbCrColorConversion")
+        let kernelFunction = defaultLibrary.newFunctionWithName("YCbCr2RGB")
         
         do {
             pipelineState = try device!.newComputePipelineStateWithFunction(kernelFunction!)
