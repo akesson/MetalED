@@ -12,13 +12,13 @@
 		C33A68371CE7B17500484F76 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C33A68351CE7B17500484F76 /* Main.storyboard */; };
 		C33A68391CE7B17500484F76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C33A68381CE7B17500484F76 /* Assets.xcassets */; };
 		C33A683C1CE7B17500484F76 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C33A683A1CE7B17500484F76 /* LaunchScreen.storyboard */; };
-		C33A68471CE7B17500484F76 /* MetalPELTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A68461CE7B17500484F76 /* MetalPELTests.swift */; };
+		C33A68471CE7B17500484F76 /* MetalEDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A68461CE7B17500484F76 /* MetalEDTests.swift */; };
 		C33A68521CE7B33C00484F76 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A68511CE7B33C00484F76 /* CameraController.swift */; };
 		C33A68541CE7BF9C00484F76 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A68531CE7BF9C00484F76 /* VideoView.swift */; };
 		C33A68571CE8C14500484F76 /* YCbCrKernel.metal in Sources */ = {isa = PBXBuildFile; fileRef = C33A68561CE8C14500484F76 /* YCbCrKernel.metal */; };
 		C33A685A1CE8D7BC00484F76 /* VideoBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A68591CE8D7BC00484F76 /* VideoBuffer.swift */; };
-		C33A685C1CEA218600484F76 /* PELKernel.metal in Sources */ = {isa = PBXBuildFile; fileRef = C33A685B1CEA218600484F76 /* PELKernel.metal */; };
-		C33A685E1CEA235800484F76 /* ImagePEL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A685D1CEA235800484F76 /* ImagePEL.swift */; };
+		C33A685C1CEA218600484F76 /* EDKernel.metal in Sources */ = {isa = PBXBuildFile; fileRef = C33A685B1CEA218600484F76 /* EDKernel.metal */; };
+		C33A685E1CEA235800484F76 /* ImageED.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A685D1CEA235800484F76 /* ImageED.swift */; };
 		C33A68611CEA319500484F76 /* ImageYCbCr2RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A68601CEA319500484F76 /* ImageYCbCr2RGB.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,22 +33,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C33A682E1CE7B17500484F76 /* MetalPEL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalPEL.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C33A682E1CE7B17500484F76 /* MetalED.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalED.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33A68311CE7B17500484F76 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C33A68331CE7B17500484F76 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C33A68361CE7B17500484F76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C33A68381CE7B17500484F76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C33A683B1CE7B17500484F76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C33A683D1CE7B17500484F76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C33A68421CE7B17500484F76 /* MetalPELTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MetalPELTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C33A68461CE7B17500484F76 /* MetalPELTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalPELTests.swift; sourceTree = "<group>"; };
+		C33A68421CE7B17500484F76 /* MetalED.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MetalED.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C33A68461CE7B17500484F76 /* MetalEDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalEDTests.swift; sourceTree = "<group>"; };
 		C33A68481CE7B17500484F76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C33A68511CE7B33C00484F76 /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		C33A68531CE7BF9C00484F76 /* VideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		C33A68561CE8C14500484F76 /* YCbCrKernel.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = YCbCrKernel.metal; sourceTree = "<group>"; };
 		C33A68591CE8D7BC00484F76 /* VideoBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoBuffer.swift; sourceTree = "<group>"; };
-		C33A685B1CEA218600484F76 /* PELKernel.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = PELKernel.metal; sourceTree = "<group>"; };
-		C33A685D1CEA235800484F76 /* ImagePEL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePEL.swift; sourceTree = "<group>"; };
+		C33A685B1CEA218600484F76 /* EDKernel.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = EDKernel.metal; sourceTree = "<group>"; };
+		C33A685D1CEA235800484F76 /* ImageED.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageED.swift; sourceTree = "<group>"; };
 		C33A68601CEA319500484F76 /* ImageYCbCr2RGB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageYCbCr2RGB.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,8 +73,8 @@
 		C33A68251CE7B17400484F76 = {
 			isa = PBXGroup;
 			children = (
-				C33A68301CE7B17500484F76 /* MetalPEL */,
-				C33A68451CE7B17500484F76 /* MetalPELTests */,
+				C33A68301CE7B17500484F76 /* MetalED */,
+				C33A68451CE7B17500484F76 /* MetalEDTests */,
 				C33A682F1CE7B17500484F76 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -82,13 +82,13 @@
 		C33A682F1CE7B17500484F76 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C33A682E1CE7B17500484F76 /* MetalPEL.app */,
-				C33A68421CE7B17500484F76 /* MetalPELTests.xctest */,
+				C33A682E1CE7B17500484F76 /* MetalED.app */,
+				C33A68421CE7B17500484F76 /* MetalED.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C33A68301CE7B17500484F76 /* MetalPEL */ = {
+		C33A68301CE7B17500484F76 /* MetalED */ = {
 			isa = PBXGroup;
 			children = (
 				C33A68581CE8C56C00484F76 /* Resources */,
@@ -98,15 +98,17 @@
 				C33A68531CE7BF9C00484F76 /* VideoView.swift */,
 				C33A68591CE8D7BC00484F76 /* VideoBuffer.swift */,
 			);
+			name = MetalED;
 			path = MetalPEL;
 			sourceTree = "<group>";
 		};
-		C33A68451CE7B17500484F76 /* MetalPELTests */ = {
+		C33A68451CE7B17500484F76 /* MetalEDTests */ = {
 			isa = PBXGroup;
 			children = (
-				C33A68461CE7B17500484F76 /* MetalPELTests.swift */,
+				C33A68461CE7B17500484F76 /* MetalEDTests.swift */,
 				C33A68481CE7B17500484F76 /* Info.plist */,
 			);
+			name = MetalEDTests;
 			path = MetalPELTests;
 			sourceTree = "<group>";
 		};
@@ -114,7 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				C33A68561CE8C14500484F76 /* YCbCrKernel.metal */,
-				C33A685B1CEA218600484F76 /* PELKernel.metal */,
+				C33A685B1CEA218600484F76 /* EDKernel.metal */,
 			);
 			name = Kernels;
 			sourceTree = "<group>";
@@ -134,7 +136,7 @@
 		C33A685F1CEA2FE700484F76 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				C33A685D1CEA235800484F76 /* ImagePEL.swift */,
+				C33A685D1CEA235800484F76 /* ImageED.swift */,
 				C33A68601CEA319500484F76 /* ImageYCbCr2RGB.swift */,
 				C33A68551CE8C12D00484F76 /* Kernels */,
 			);
@@ -144,9 +146,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C33A682D1CE7B17500484F76 /* MetalPEL */ = {
+		C33A682D1CE7B17500484F76 /* MetalED */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C33A684B1CE7B17500484F76 /* Build configuration list for PBXNativeTarget "MetalPEL" */;
+			buildConfigurationList = C33A684B1CE7B17500484F76 /* Build configuration list for PBXNativeTarget "MetalED" */;
 			buildPhases = (
 				C33A682A1CE7B17500484F76 /* Sources */,
 				C33A682B1CE7B17500484F76 /* Frameworks */,
@@ -156,14 +158,14 @@
 			);
 			dependencies = (
 			);
-			name = MetalPEL;
+			name = MetalED;
 			productName = MetalPEL;
-			productReference = C33A682E1CE7B17500484F76 /* MetalPEL.app */;
+			productReference = C33A682E1CE7B17500484F76 /* MetalED.app */;
 			productType = "com.apple.product-type.application";
 		};
-		C33A68411CE7B17500484F76 /* MetalPELTests */ = {
+		C33A68411CE7B17500484F76 /* MetalEDTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C33A684E1CE7B17500484F76 /* Build configuration list for PBXNativeTarget "MetalPELTests" */;
+			buildConfigurationList = C33A684E1CE7B17500484F76 /* Build configuration list for PBXNativeTarget "MetalEDTests" */;
 			buildPhases = (
 				C33A683E1CE7B17500484F76 /* Sources */,
 				C33A683F1CE7B17500484F76 /* Frameworks */,
@@ -174,9 +176,9 @@
 			dependencies = (
 				C33A68441CE7B17500484F76 /* PBXTargetDependency */,
 			);
-			name = MetalPELTests;
+			name = MetalEDTests;
 			productName = MetalPELTests;
-			productReference = C33A68421CE7B17500484F76 /* MetalPELTests.xctest */;
+			productReference = C33A68421CE7B17500484F76 /* MetalED.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -199,7 +201,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C33A68291CE7B17400484F76 /* Build configuration list for PBXProject "MetalPEL" */;
+			buildConfigurationList = C33A68291CE7B17400484F76 /* Build configuration list for PBXProject "MetalED" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -212,8 +214,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C33A682D1CE7B17500484F76 /* MetalPEL */,
-				C33A68411CE7B17500484F76 /* MetalPELTests */,
+				C33A682D1CE7B17500484F76 /* MetalED */,
+				C33A68411CE7B17500484F76 /* MetalEDTests */,
 			);
 		};
 /* End PBXProject section */
@@ -246,11 +248,11 @@
 				C33A68611CEA319500484F76 /* ImageYCbCr2RGB.swift in Sources */,
 				C33A68541CE7BF9C00484F76 /* VideoView.swift in Sources */,
 				C33A68521CE7B33C00484F76 /* CameraController.swift in Sources */,
-				C33A685C1CEA218600484F76 /* PELKernel.metal in Sources */,
+				C33A685C1CEA218600484F76 /* EDKernel.metal in Sources */,
 				C33A68341CE7B17500484F76 /* ViewController.swift in Sources */,
 				C33A68571CE8C14500484F76 /* YCbCrKernel.metal in Sources */,
 				C33A68321CE7B17500484F76 /* AppDelegate.swift in Sources */,
-				C33A685E1CEA235800484F76 /* ImagePEL.swift in Sources */,
+				C33A685E1CEA235800484F76 /* ImageED.swift in Sources */,
 				C33A685A1CE8D7BC00484F76 /* VideoBuffer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,7 +261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C33A68471CE7B17500484F76 /* MetalPELTests.swift in Sources */,
+				C33A68471CE7B17500484F76 /* MetalEDTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,7 +270,7 @@
 /* Begin PBXTargetDependency section */
 		C33A68441CE7B17500484F76 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C33A682D1CE7B17500484F76 /* MetalPEL */;
+			target = C33A682D1CE7B17500484F76 /* MetalED */;
 			targetProxy = C33A68431CE7B17500484F76 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -386,8 +388,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MetalPEL/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = mobi.akesson.MetalPEL;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = mobi.akesson.MetalED;
+				PRODUCT_NAME = MetalED;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -400,8 +402,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MetalPEL/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = mobi.akesson.MetalPEL;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = mobi.akesson.MetalED;
+				PRODUCT_NAME = MetalED;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
@@ -413,8 +415,8 @@
 				INFOPLIST_FILE = MetalPELTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mobi.akesson.MetalPELTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MetalPEL.app/MetalPEL";
+				PRODUCT_NAME = MetalED;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MetalED.app/MetalED";
 			};
 			name = Debug;
 		};
@@ -425,15 +427,15 @@
 				INFOPLIST_FILE = MetalPELTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mobi.akesson.MetalPELTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MetalPEL.app/MetalPEL";
+				PRODUCT_NAME = MetalED;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MetalED.app/MetalED";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C33A68291CE7B17400484F76 /* Build configuration list for PBXProject "MetalPEL" */ = {
+		C33A68291CE7B17400484F76 /* Build configuration list for PBXProject "MetalED" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C33A68491CE7B17500484F76 /* Debug */,
@@ -442,7 +444,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C33A684B1CE7B17500484F76 /* Build configuration list for PBXNativeTarget "MetalPEL" */ = {
+		C33A684B1CE7B17500484F76 /* Build configuration list for PBXNativeTarget "MetalED" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C33A684C1CE7B17500484F76 /* Debug */,
@@ -451,7 +453,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C33A684E1CE7B17500484F76 /* Build configuration list for PBXNativeTarget "MetalPELTests" */ = {
+		C33A684E1CE7B17500484F76 /* Build configuration list for PBXNativeTarget "MetalEDTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C33A684F1CE7B17500484F76 /* Debug */,

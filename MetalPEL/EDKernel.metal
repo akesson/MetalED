@@ -11,7 +11,7 @@ using namespace metal;
 
 
 
-kernel void PEL(texture2d<float, access::read> inTexture [[texture(0)]],
+kernel void ED(texture2d<float, access::read> inTexture [[texture(0)]],
                 texture2d<float, access::write> outTexture [[texture(1)]],
                 uint2 gid [[thread_position_in_grid]])
 {

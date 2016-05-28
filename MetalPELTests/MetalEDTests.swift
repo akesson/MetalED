@@ -1,15 +1,15 @@
 //
-//  MetalPELTests.swift
-//  MetalPELTests
+//  MetalEDTests.swift
+//  MetalEDTests
 //
 //  Created by Henrik Akesson on 14/05/2016.
 //  Copyright © 2016 Henrik Akesson. All rights reserved.
 //
 
 import XCTest
-@testable import MetalPEL
+@testable import MetalED
 
-class MetalPELTests: XCTestCase {
+class MetalEDTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

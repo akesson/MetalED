@@ -8,9 +8,9 @@
 
 import MetalPerformanceShaders
 
-public class ImagePEL: MPSUnaryImageKernel {
+public class ImageED: MPSUnaryImageKernel {
     
-    let PELKernelName = "PEL"
+    let KernelName = "ED"
     var computePipeline: MTLComputePipelineState!
 
     public override init(device: MTLDevice) {
@@ -19,14 +19,14 @@ public class ImagePEL: MPSUnaryImageKernel {
         //self.edgeMode = .Zero
         
         if let library = device.newDefaultLibrary() {
-            if let computeFunction = library.newFunctionWithName(PELKernelName) {
+            if let computeFunction = library.newFunctionWithName(KernelName) {
                 do {
                     try computePipeline = device.newComputePipelineStateWithFunction(computeFunction)
                 } catch {
                     print("Error occurred when compiling compute pipeline: \(error)")
                 }
             } else {
-                print("Failed to retrieve kernel function \(PELKernelName) from library")
+                print("Failed to retrieve kernel function \(KernelName) from library")
             }
         }
     }
@@ -47,7 +47,7 @@ public class ImagePEL: MPSUnaryImageKernel {
         
         // Set up and dispatch the work
         let commandEncoder = commandBuffer.computeCommandEncoder()
-        commandEncoder.pushDebugGroup("Dispatch PEL kernel")
+        commandEncoder.pushDebugGroup("Dispatch \(KernelName) kernel")
         commandEncoder.setComputePipelineState(computePipeline)
         commandEncoder.setTexture(sourceTexture, atIndex: 0)
         commandEncoder.setTexture(destTexture, atIndex: 1)

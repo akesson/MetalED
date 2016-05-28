@@ -20,7 +20,7 @@ class VideoView:MTKView {
     
     var blur: MPSImageGaussianBlur!
     var sobel: MPSImageSobel!
-    var pel: ImagePEL!
+    var pel: ImageED!
     var colorConvert: ImageYCbCr2RGB!
     
     let videoBuffer:VideoBuffer
@@ -54,7 +54,7 @@ class VideoView:MTKView {
         //sobel = MPSImageSobel(device: device!, linearGrayColorTransform: luminanceWeights)
         sobel = MPSImageSobel(device: device!)
         blur = MPSImageGaussianBlur(device: device!, sigma: 2)
-        pel = ImagePEL(device: device!)
+        pel = ImageED(device: device!)
         colorConvert = ImageYCbCr2RGB(device: device!)
     }
     
