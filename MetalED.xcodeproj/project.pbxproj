@@ -98,8 +98,7 @@
 				C33A68531CE7BF9C00484F76 /* VideoView.swift */,
 				C33A68591CE8D7BC00484F76 /* VideoBuffer.swift */,
 			);
-			name = MetalED;
-			path = MetalPEL;
+			path = MetalED;
 			sourceTree = "<group>";
 		};
 		C33A68451CE7B17500484F76 /* MetalEDTests */ = {
@@ -108,8 +107,7 @@
 				C33A68461CE7B17500484F76 /* MetalEDTests.swift */,
 				C33A68481CE7B17500484F76 /* Info.plist */,
 			);
-			name = MetalEDTests;
-			path = MetalPELTests;
+			path = MetalEDTests;
 			sourceTree = "<group>";
 		};
 		C33A68551CE8C12D00484F76 /* Kernels */ = {
