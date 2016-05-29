@@ -20,7 +20,7 @@ class VideoView:MTKView {
     
     var blur: MPSImageGaussianBlur!
     var sobel: MPSImageSobel!
-    var pel: ImageED!
+    var diZenzo: ImageSobelAndDiZenzoCumani!
     var colorConvert: ImageYCbCr2RGB!
     
     let videoBuffer:VideoBuffer
@@ -54,7 +54,7 @@ class VideoView:MTKView {
         //sobel = MPSImageSobel(device: device!, linearGrayColorTransform: luminanceWeights)
         sobel = MPSImageSobel(device: device!)
         blur = MPSImageGaussianBlur(device: device!, sigma: 2)
-        pel = ImageED(device: device!)
+        diZenzo = ImageSobelAndDiZenzoCumani(device: device!)
         colorConvert = ImageYCbCr2RGB(device: device!)
     }
     
@@ -87,8 +87,8 @@ class VideoView:MTKView {
         
         colorConvert.encodeToCommandBuffer(commandBuffer, yTexture: ytexture, cbcrTexture: cbcrTexture, destinationTexture: workTexture1!)
         blur.encodeToCommandBuffer(commandBuffer, inPlaceTexture: inPlaceTexture, fallbackCopyAllocator: nil)
-        sobel.encodeToCommandBuffer(commandBuffer, sourceTexture: workTexture1!, destinationTexture: workTexture2!)
-        pel.encodeToCommandBuffer(commandBuffer, sourceTexture: workTexture2!, destinationTexture: drawable.texture)
+        //sobel.encodeToCommandBuffer(commandBuffer, sourceTexture: workTexture1!, destinationTexture: workTexture2!)
+        diZenzo.encodeToCommandBuffer(commandBuffer, sourceTexture: workTexture1!, destinationTexture: drawable.texture)
         commandBuffer.presentDrawable(drawable)
         
         commandBuffer.commit();

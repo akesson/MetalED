@@ -8,9 +8,9 @@
 
 import MetalPerformanceShaders
 
-public class ImageED: MPSUnaryImageKernel {
+public class ImageSobelAndDiZenzoCumani: MPSUnaryImageKernel {
     
-    let KernelName = "ED"
+    let KernelName = "SobelAndDiZenzoCumani"
     var computePipeline: MTLComputePipelineState!
 
     public override init(device: MTLDevice) {
