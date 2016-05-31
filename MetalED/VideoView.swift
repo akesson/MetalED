@@ -18,14 +18,13 @@ class VideoView:MTKView {
     var threadsPerThreadgroup = MTLSizeMake(16, 16, 1)
     var threadgroupsPerGrid: MTLSize!
     
-    var blur: MPSImageGaussianBlur!
-    var sobel: MPSImageSobel!
-    var diZenzo: ImageSobelAndDiZenzoCumani!
     var colorConvert: ImageYCbCr2RGB!
     
     let videoBuffer:VideoBuffer
     var workTexture1: MTLTexture?
     var workTexture2: MTLTexture?
+    
+    var kernels = [MPSUnaryImageKernel]();
 
     override var drawableSize: CGSize {
         didSet {
@@ -50,12 +49,11 @@ class VideoView:MTKView {
             fatalError("Unable to create pipeline state")
         }
         
-        //let luminanceWeights: [Float] = [ 0.333, 0.334, 0.333 ]
-        //sobel = MPSImageSobel(device: device!, linearGrayColorTransform: luminanceWeights)
-        sobel = MPSImageSobel(device: device!)
-        blur = MPSImageGaussianBlur(device: device!, sigma: 2)
-        diZenzo = ImageSobelAndDiZenzoCumani(device: device!)
         colorConvert = ImageYCbCr2RGB(device: device!)
+        
+        kernels.append(MPSImageGaussianBlur(device: device!, sigma: 2));
+        //kernels.append(MPSImageSobel(device: device!));
+        kernels.append(ImageSobelAndDiZenzoCumani(device: device!));
     }
     
     
@@ -71,10 +69,6 @@ class VideoView:MTKView {
         }
     }
     
-    func setBlurSigma(sigma: Float) {
-        blur = MPSImageGaussianBlur(device: device!, sigma: sigma)
-    }
-    
     override func drawRect(dirtyRect: CGRect) {
         guard let drawable = currentDrawable, ytexture = videoBuffer.yTexture, cbcrTexture = videoBuffer.cbcrTexture else {
             return
@@ -85,12 +79,28 @@ class VideoView:MTKView {
         let inPlaceTexture = UnsafeMutablePointer<MTLTexture?>.alloc(1)
         inPlaceTexture.initialize(workTexture1)
         
-        colorConvert.encodeToCommandBuffer(commandBuffer, yTexture: ytexture, cbcrTexture: cbcrTexture, destinationTexture: workTexture1!)
-        blur.encodeToCommandBuffer(commandBuffer, inPlaceTexture: inPlaceTexture, fallbackCopyAllocator: nil)
-        //sobel.encodeToCommandBuffer(commandBuffer, sourceTexture: workTexture1!, destinationTexture: workTexture2!)
-        diZenzo.encodeToCommandBuffer(commandBuffer, sourceTexture: workTexture1!, destinationTexture: drawable.texture)
-        commandBuffer.presentDrawable(drawable)
+        var inTexture = workTexture1!
+        var outTexture = workTexture2!
+
+        if (kernels.count == 0) {
+            colorConvert.encodeToCommandBuffer(commandBuffer, yTexture: ytexture, cbcrTexture: cbcrTexture, destinationTexture: drawable.texture)
+        } else {
+            colorConvert.encodeToCommandBuffer(commandBuffer, yTexture: ytexture, cbcrTexture: cbcrTexture, destinationTexture: inTexture)
+        }
         
+        for kernel in kernels {
+            if kernel == kernels.last {
+                runKernel(kernel, commandBuffer: commandBuffer, inTexture: inTexture, outTexture: drawable.texture)
+            } else {
+                (inTexture, outTexture) = runKernel(kernel, commandBuffer: commandBuffer, inTexture: inTexture, outTexture: outTexture)
+            }
+        }
+        commandBuffer.presentDrawable(drawable)
         commandBuffer.commit();
+    }
+    
+    func runKernel(kernel: MPSUnaryImageKernel, commandBuffer: MTLCommandBuffer, inTexture: MTLTexture!, outTexture: MTLTexture!) -> (MTLTexture, MTLTexture) {
+        kernel.encodeToCommandBuffer(commandBuffer, sourceTexture: inTexture, destinationTexture: outTexture)
+        return (outTexture, inTexture)
     }
 }
