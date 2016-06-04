@@ -10,25 +10,14 @@ import MetalPerformanceShaders
 
 public class CommandEncoder {
     
-    let computePipeline: MTLComputePipelineState
+    let computePipelineState: MTLComputePipelineState
     let kernelName: String
     let threadsPerThreadgroup: MTLSize
     
-    public init(device: MTLDevice, kernelName: String, threadsPerThreadgroup: MTLSize) {
+    public init(kernelName: String, threadsPerThreadgroup: MTLSize) {
         self.kernelName = kernelName
         self.threadsPerThreadgroup = threadsPerThreadgroup
-        guard let library = device.newDefaultLibrary() else {
-            fatalError("Failed to read kernel library")
-        }
-        guard let computeFunction = library.newFunctionWithName(kernelName) else {
-            fatalError("Failed to retrieve kernel function \(kernelName) from library")
-        }
-        
-        do {
-            try computePipeline = device.newComputePipelineStateWithFunction(computeFunction)
-        } catch {
-            fatalError("Error occurred when compiling compute pipeline: \(error)")
-        }
+        computePipelineState = GPU.computePipelineStateFor(kernelName)
     }
     
     public func encodeToCommandBuffer(commandBuffer: MTLCommandBuffer,
@@ -37,7 +26,7 @@ public class CommandEncoder {
         // Set up and dispatch the work
         let commandEncoder = commandBuffer.computeCommandEncoder()
         commandEncoder.pushDebugGroup("Dispatch \(kernelName) kernel")
-        commandEncoder.setComputePipelineState(computePipeline)
+        commandEncoder.setComputePipelineState(computePipelineState)
         for (index,texture) in textures.enumerate() {
             commandEncoder.setTexture(texture, atIndex: index)
         }

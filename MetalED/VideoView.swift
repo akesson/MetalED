@@ -12,8 +12,7 @@ import MetalPerformanceShaders
 
 
 class VideoView:MTKView {
-    var commandQueue: MTLCommandQueue!
-    
+
     let colorConvert: ImageYCbCr2RGB
     
     let videoBuffer:VideoBuffer
@@ -23,24 +22,20 @@ class VideoView:MTKView {
     let kernels:[MPSUnaryImageKernel];
 
     required init(frame: CGRect) {
-        let device = MTLCreateSystemDefaultDevice()
-        videoBuffer = VideoBuffer(frame: CGRectZero, device: device!)
-        colorConvert = ImageYCbCr2RGB(device: device!)
+        videoBuffer = VideoBuffer()
+        colorConvert = ImageYCbCr2RGB()
         
-        let desc = MTLTextureDescriptor.texture2DDescriptorWithPixelFormat(MTLPixelFormat.BGRA8Unorm, width: Int(1920), height: Int(1080), mipmapped: false)
-        workTexture1 = device!.newTextureWithDescriptor(desc)
-        workTexture2 = device!.newTextureWithDescriptor(desc)
+        workTexture1 = GPU.newTexture(width: 1920, height: 1080)
+        workTexture2 = GPU.newTexture(width: 1920, height: 1080)
 
         kernels = [
-            MPSImageGaussianBlur(device: device!, sigma: 2),
-            //MPSImageSobel(device: device!),
-            ImageSobelAndDiZenzoCumani(device: device!)
+            MPSImageGaussianBlur(device: GPU.device, sigma: 2),
+            //MPSImageSobel(device: GPU.device),
+            ImageSobelAndDiZenzoCumani()
         ]
 
-        super.init(frame: frame, device:  device)
+        super.init(frame: frame, device:  GPU.device)
         framebufferOnly = false
-        
-        commandQueue = device!.newCommandQueue()
     }
     
     required init(coder: NSCoder) {
@@ -52,7 +47,7 @@ class VideoView:MTKView {
             return
         }
         
-        let commandBuffer = commandQueue.commandBuffer()
+        let commandBuffer = GPU.commandBuffer()
         
         var inTexture = workTexture1
         var outTexture = kernels.isEmpty ? drawable.texture : workTexture2

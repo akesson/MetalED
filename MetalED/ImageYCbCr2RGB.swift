@@ -12,8 +12,8 @@ public class ImageYCbCr2RGB {
     
     let commandEncoder: CommandEncoder
     
-    public init(device: MTLDevice) {
-        commandEncoder = CommandEncoder(device: device, kernelName: "YCbCr2RGB_Kernel", threadsPerThreadgroup: MTLSizeMake(16, 16, 1))
+    public init() {
+        commandEncoder = CommandEncoder(kernelName: "YCbCr2RGB_Kernel", threadsPerThreadgroup: MTLSizeMake(16, 16, 1))
     }
     
     public func encodeToCommandBuffer(commandBuffer: MTLCommandBuffer,

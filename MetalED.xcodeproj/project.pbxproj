@@ -21,6 +21,8 @@
 		C33A685E1CEA235800484F76 /* ImageSobelAndDiZenzoCumani.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A685D1CEA235800484F76 /* ImageSobelAndDiZenzoCumani.swift */; };
 		C33A68611CEA319500484F76 /* ImageYCbCr2RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A68601CEA319500484F76 /* ImageYCbCr2RGB.swift */; };
 		C34F48BC1D03304F00E6E0D4 /* CommandEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34F48BB1D03304F00E6E0D4 /* CommandEncoder.swift */; };
+		C34F48BE1D03447000E6E0D4 /* RenderEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34F48BD1D03447000E6E0D4 /* RenderEncoder.swift */; };
+		C34F48C01D0349FA00E6E0D4 /* GPU.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34F48BF1D0349FA00E6E0D4 /* GPU.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,8 @@
 		C33A685D1CEA235800484F76 /* ImageSobelAndDiZenzoCumani.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSobelAndDiZenzoCumani.swift; sourceTree = "<group>"; };
 		C33A68601CEA319500484F76 /* ImageYCbCr2RGB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageYCbCr2RGB.swift; sourceTree = "<group>"; };
 		C34F48BB1D03304F00E6E0D4 /* CommandEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandEncoder.swift; sourceTree = "<group>"; };
+		C34F48BD1D03447000E6E0D4 /* RenderEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderEncoder.swift; sourceTree = "<group>"; };
+		C34F48BF1D0349FA00E6E0D4 /* GPU.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPU.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,7 @@
 				C33A68511CE7B33C00484F76 /* CameraController.swift */,
 				C33A68531CE7BF9C00484F76 /* VideoView.swift */,
 				C33A68591CE8D7BC00484F76 /* VideoBuffer.swift */,
+				C34F48BF1D0349FA00E6E0D4 /* GPU.swift */,
 			);
 			path = MetalED;
 			sourceTree = "<group>";
@@ -139,6 +144,7 @@
 				C33A685D1CEA235800484F76 /* ImageSobelAndDiZenzoCumani.swift */,
 				C33A68601CEA319500484F76 /* ImageYCbCr2RGB.swift */,
 				C34F48BB1D03304F00E6E0D4 /* CommandEncoder.swift */,
+				C34F48BD1D03447000E6E0D4 /* RenderEncoder.swift */,
 				C33A68551CE8C12D00484F76 /* Kernels */,
 			);
 			name = Shaders;
@@ -247,6 +253,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C33A68611CEA319500484F76 /* ImageYCbCr2RGB.swift in Sources */,
+				C34F48C01D0349FA00E6E0D4 /* GPU.swift in Sources */,
+				C34F48BE1D03447000E6E0D4 /* RenderEncoder.swift in Sources */,
 				C33A68541CE7BF9C00484F76 /* VideoView.swift in Sources */,
 				C33A68521CE7B33C00484F76 /* CameraController.swift in Sources */,
 				C33A685C1CEA218600484F76 /* SobelAndDiZenzoCumaniKernel.metal in Sources */,

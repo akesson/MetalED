@@ -12,9 +12,9 @@ public class ImageSobelAndDiZenzoCumani: MPSUnaryImageKernel {
     
     let commandEncoder:CommandEncoder
     
-    public override init(device: MTLDevice) {
-        commandEncoder = CommandEncoder(device: device, kernelName: "SobelAndDiZenzoCumani_Kernel", threadsPerThreadgroup: MTLSizeMake(16, 16, 1))
-        super.init(device: device)
+    public init() {
+        commandEncoder = CommandEncoder(kernelName: "SobelAndDiZenzoCumani_Kernel", threadsPerThreadgroup: MTLSizeMake(16, 16, 1))
+        super.init(device: GPU.device)
     }
     
     public override func encodeToCommandBuffer(commandBuffer: MTLCommandBuffer,
