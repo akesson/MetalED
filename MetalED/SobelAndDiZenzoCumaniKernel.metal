@@ -13,7 +13,7 @@ using namespace metal;
  Uses Sobel for calculating the edges for RGB and calculates the magnitude by using the DiZenzo-Cumani algo.
  */
 
-kernel void SobelAndDiZenzoCumani(texture2d<half, access::read> inTexture [[texture(0)]],
+kernel void SobelAndDiZenzoCumani_Kernel(texture2d<half, access::read> inTexture [[texture(0)]],
                 texture2d<half, access::write> outTexture [[texture(1)]],
                 uint2 gid [[thread_position_in_grid]])
 {
