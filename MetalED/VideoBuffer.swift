@@ -18,8 +18,8 @@ class VideoBuffer: CameraCaptureDelegate {
 
     var videoTextureCache : Unmanaged<CVMetalTextureCacheRef>?
     
-    init(frame: CGRect, device:MTLDevice) {
-        
+    init() {
+        let device = GPU.device
         // Texture for Y
         CVMetalTextureCacheCreate(kCFAllocatorDefault, nil, device, nil, &videoTextureCache)
         
