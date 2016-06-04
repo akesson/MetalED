@@ -13,12 +13,11 @@ import MetalPerformanceShaders
 
 class VideoView:MTKView {
     var pipelineState: MTLComputePipelineState!
-    var defaultLibrary: MTLLibrary!
     var commandQueue: MTLCommandQueue!
     var threadsPerThreadgroup = MTLSizeMake(16, 16, 1)
     var threadgroupsPerGrid: MTLSize!
     
-    var colorConvert: ImageYCbCr2RGB!
+    let colorConvert: ImageYCbCr2RGB!
     
     let videoBuffer:VideoBuffer
     var workTexture1: MTLTexture?
@@ -35,12 +34,13 @@ class VideoView:MTKView {
     required init(frame: CGRect) {
         let device = MTLCreateSystemDefaultDevice()
         videoBuffer = VideoBuffer(frame: CGRectZero, device: device!)
+        colorConvert = ImageYCbCr2RGB(device: device!)
         super.init(frame: frame, device:  device)
         framebufferOnly = false
         
-        defaultLibrary = device!.newDefaultLibrary()!
         commandQueue = device!.newCommandQueue()
         
+        let defaultLibrary = device!.newDefaultLibrary()!
         let kernelFunction = defaultLibrary.newFunctionWithName("YCbCr2RGB")
         
         do {
@@ -49,7 +49,6 @@ class VideoView:MTKView {
             fatalError("Unable to create pipeline state")
         }
         
-        colorConvert = ImageYCbCr2RGB(device: device!)
         
         kernels.append(MPSImageGaussianBlur(device: device!, sigma: 2));
         //kernels.append(MPSImageSobel(device: device!));
