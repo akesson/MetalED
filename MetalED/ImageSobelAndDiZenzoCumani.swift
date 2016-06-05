@@ -22,6 +22,6 @@ public class ImageSobelAndDiZenzoCumani: MPSUnaryImageKernel {
                                                destinationTexture destTexture: MTLTexture) {
         
         let threadgroupsPerGrid = commandEncoder.threadgroupsPerGridFromTexture(destTexture)
-        commandEncoder.encodeToCommandBuffer(commandBuffer, textures: [sourceTexture, destTexture], threadgroupsPerGrid: threadgroupsPerGrid)
+        commandEncoder.encodeToCommandBuffer(commandBuffer, textures: [sourceTexture, destTexture], buffers: [], threadgroupsPerGrid: threadgroupsPerGrid)
     }
 }

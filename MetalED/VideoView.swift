@@ -6,18 +6,19 @@
 //  Copyright © 2016 Henrik Akesson. All rights reserved.
 //
 
-import Foundation
 import MetalKit
 import MetalPerformanceShaders
 
-
 class VideoView:MTKView {
-
+    
     let colorConvert: ImageYCbCr2RGB
     
     let videoBuffer:VideoBuffer
-    let workTexture1: MTLTexture
-    let workTexture2: MTLTexture
+    let tmpTarget1: RenderTarget!
+    let tmpTarget2: RenderTarget!
+    var viewTarget: RenderTarget { //always recreated as the drawable is uing double buffering
+        return RenderTarget(self.currentDrawable!.texture, self.currentRenderPassDescriptor!)
+    }
     
     let kernels:[MPSUnaryImageKernel];
 
@@ -25,16 +26,17 @@ class VideoView:MTKView {
         videoBuffer = VideoBuffer()
         colorConvert = ImageYCbCr2RGB()
         
-        workTexture1 = GPU.newTexture(width: 1920, height: 1080)
-        workTexture2 = GPU.newTexture(width: 1920, height: 1080)
-
+        tmpTarget1 = RenderTarget(GPU.newTexture(width: 1920, height: 1080))
+        tmpTarget2 = RenderTarget(GPU.newTexture(width: 1920, height: 1080))
+        
         kernels = [
-            MPSImageGaussianBlur(device: GPU.device, sigma: 2),
+            //MPSImageGaussianBlur(device: GPU.device, sigma: 2),
             //MPSImageSobel(device: GPU.device),
             ImageSobelAndDiZenzoCumani()
         ]
-
+        
         super.init(frame: frame, device:  GPU.device)
+        
         framebufferOnly = false
     }
     
@@ -49,15 +51,16 @@ class VideoView:MTKView {
         
         let commandBuffer = GPU.commandBuffer()
         
-        var inTexture = workTexture1
-        var outTexture = kernels.isEmpty ? drawable.texture : workTexture2
+        var inTexture = tmpTarget1
+        var outTexture = kernels.isEmpty ? viewTarget : tmpTarget2
 
-        colorConvert.encodeToCommandBuffer(commandBuffer, yTexture: ytexture, cbcrTexture: cbcrTexture, destinationTexture: outTexture)
+        colorConvert.encodeToFragmentBuffer(commandBuffer, descriptor: outTexture.descriptor, yTexture: ytexture, cbcrTexture: cbcrTexture, destinationTexture: outTexture.texture)
+        //colorConvert.encodeToCommandBuffer(commandBuffer, yTexture: ytexture, cbcrTexture: cbcrTexture, destinationTexture: outTexture.texture)
         
         for kernel in kernels {
             let last = kernel == kernels.last
             swap(&inTexture, &outTexture)
-            kernel.encodeToCommandBuffer(commandBuffer, sourceTexture: inTexture, destinationTexture: last ? drawable.texture : outTexture)
+            kernel.encodeToCommandBuffer(commandBuffer, sourceTexture: inTexture.texture, destinationTexture: (last ? viewTarget : outTexture).texture)
         }
         
         commandBuffer.presentDrawable(drawable)

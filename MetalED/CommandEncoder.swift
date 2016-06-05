@@ -22,11 +22,15 @@ public class CommandEncoder {
     
     public func encodeToCommandBuffer(commandBuffer: MTLCommandBuffer,
                                       textures: [MTLTexture],
+                                      buffers: [MTLBuffer],
                                       threadgroupsPerGrid: MTLSize) {
         // Set up and dispatch the work
         let commandEncoder = commandBuffer.computeCommandEncoder()
         commandEncoder.pushDebugGroup("Dispatch \(kernelName) kernel")
         commandEncoder.setComputePipelineState(computePipelineState)
+        for (index, buffer) in buffers.enumerate() {
+            commandEncoder.setBuffer(buffer, offset: 0, atIndex: index)
+        }
         for (index,texture) in textures.enumerate() {
             commandEncoder.setTexture(texture, atIndex: index)
         }
