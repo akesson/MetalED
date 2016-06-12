@@ -8,14 +8,12 @@
 
 import MetalPerformanceShaders
 
-public class RenderEncoder {
+class RenderEncoder: Encoder {
     
     let renderPipelineState: MTLRenderPipelineState
-    let renderName:String
     let samplerStates: [MTLSamplerState]
     
-    public init(renderName: String, vertexFunction: String, fragmentFunction: String) {
-        self.renderName = renderName
+    init(renderName: String, vertexFunction: String, fragmentFunction: String, threadsPerThreadgroup: MTLSize) {
         
         renderPipelineState = GPU.renderPipelineStateFor(renderName, vertexFunction: vertexFunction, fragmentFunction: fragmentFunction)
         let nearest = MTLSamplerDescriptor()
@@ -26,19 +24,20 @@ public class RenderEncoder {
         bilinear.minFilter = .Linear
         bilinear.magFilter = .Linear
         samplerStates = [nearest, bilinear].map {GPU.newSamplerState($0)}
+        super.init(name: renderName, threadsPerThreadgroup: threadsPerThreadgroup)
 
     }
     
-    public func encodeToRenderBuffer(commandBuffer: MTLCommandBuffer,
-                                     descriptor: MTLRenderPassDescriptor,
-                                     textures: [MTLTexture],
-                                     fragmentBuffers: [MTLBuffer],
-                                     threadgroupsPerGrid: MTLSize) {
+    func encodeToRenderBuffer(commandBuffer: MTLCommandBuffer,
+                              descriptor: MTLRenderPassDescriptor,
+                              textures: [MTLTexture],
+                              fragmentBuffers: [MTLBuffer],
+                              threadgroupsPerGrid: MTLSize) {
         
         let renderEncoder = commandBuffer.renderCommandEncoderWithDescriptor(descriptor)
         
-        renderEncoder.pushDebugGroup(renderName)
-        renderEncoder.label = renderName
+        renderEncoder.pushDebugGroup(name)
+        renderEncoder.label = name
         
         //Sets the viewport, which is used to transform vertices from normalized device coordinates to window coordinates.
         //renderEncoder.setViewport(view)  //MTLViewport only last render

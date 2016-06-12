@@ -1,5 +1,5 @@
 //
-//  YCbCrKernel.metal
+//  YCbCr2RGB.metal
 //  MetalPEL
 //
 //  Created by Henrik Akesson on 15/05/2016.

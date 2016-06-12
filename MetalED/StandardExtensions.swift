@@ -6,7 +6,7 @@
 //  Copyright © 2016 Henrik Akesson. All rights reserved.
 //
 
-import Foundation
+import MetalPerformanceShaders
 
 extension Dictionary {
     
@@ -18,5 +18,12 @@ extension Dictionary {
             self[key] = val
             return val
         }
+    }
+}
+
+extension MPSUnaryImageKernel : RenderProtocol {
+    
+    func encodeToBuffer(commandBuffer: MTLCommandBuffer, renderDescriptor: MTLRenderPassDescriptor, inTexture: MTLTexture, outTexture: MTLTexture) {
+        encodeToCommandBuffer(commandBuffer, sourceTexture: inTexture, destinationTexture: outTexture)
     }
 }

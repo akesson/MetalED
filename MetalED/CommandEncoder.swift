@@ -8,25 +8,22 @@
 
 import MetalPerformanceShaders
 
-public class CommandEncoder {
+class CommandEncoder: Encoder {
     
     let computePipelineState: MTLComputePipelineState
-    let kernelName: String
-    let threadsPerThreadgroup: MTLSize
     
-    public init(kernelName: String, threadsPerThreadgroup: MTLSize) {
-        self.kernelName = kernelName
-        self.threadsPerThreadgroup = threadsPerThreadgroup
+    init(kernelName: String, threadsPerThreadgroup: MTLSize) {
         computePipelineState = GPU.computePipelineStateFor(kernelName)
+        super.init(name: kernelName, threadsPerThreadgroup: threadsPerThreadgroup)
     }
     
-    public func encodeToCommandBuffer(commandBuffer: MTLCommandBuffer,
+    func encodeToCommandBuffer(commandBuffer: MTLCommandBuffer,
                                       textures: [MTLTexture],
                                       buffers: [MTLBuffer],
                                       threadgroupsPerGrid: MTLSize) {
         // Set up and dispatch the work
         let commandEncoder = commandBuffer.computeCommandEncoder()
-        commandEncoder.pushDebugGroup("Dispatch \(kernelName) kernel")
+        commandEncoder.pushDebugGroup("Dispatch \(name) kernel")
         commandEncoder.setComputePipelineState(computePipelineState)
         for (index, buffer) in buffers.enumerate() {
             commandEncoder.setBuffer(buffer, offset: 0, atIndex: index)
@@ -39,13 +36,5 @@ public class CommandEncoder {
         commandEncoder.endEncoding()
     }
     
-    public func threadgroupsPerGridFromTexture(texture: MTLTexture) -> MTLSize {
-        // Determine how many threadgroups we need to dispatch to fully cover the destination region
-        // There will almost certainly be some wasted threads except when both textures are neat
-        // multiples of the thread-per-threadgroup size and the offset and clip region are agreeable.
-        let widthInThreadgroups = (texture.width + threadsPerThreadgroup.width - 1) / threadsPerThreadgroup.width
-        let heightInThreadgroups = (texture.height + threadsPerThreadgroup.height - 1) / threadsPerThreadgroup.height
-
-        return MTLSizeMake(widthInThreadgroups, heightInThreadgroups, 1)
-    }
+    
 }

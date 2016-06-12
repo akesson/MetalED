@@ -11,7 +11,7 @@ import MetalPerformanceShaders
 
 class VideoView:MTKView {
     
-    let colorConvert: ImageYCbCr2RGB
+    let colorConvert: YCbCr2RGB
     
     let videoBuffer:VideoBuffer
     let tmpTarget1: RenderTarget!
@@ -20,19 +20,21 @@ class VideoView:MTKView {
         return RenderTarget(self.currentDrawable!.texture, self.currentRenderPassDescriptor!)
     }
     
-    let kernels:[MPSUnaryImageKernel];
+    let kernels:[RenderProtocol];
 
     required init(frame: CGRect) {
         videoBuffer = VideoBuffer()
-        colorConvert = ImageYCbCr2RGB()
         
         tmpTarget1 = RenderTarget(GPU.newTexture(width: 1920, height: 1080))
         tmpTarget2 = RenderTarget(GPU.newTexture(width: 1920, height: 1080))
         
+        //colorConvert = YCbCr2RGBKernel()
+        colorConvert = YCbCr2RGBFragment()
+        
         kernels = [
-            //MPSImageGaussianBlur(device: GPU.device, sigma: 2),
+            MPSImageGaussianBlur(device: GPU.device, sigma: 2),
             //MPSImageSobel(device: GPU.device),
-            ImageSobelAndDiZenzoCumani()
+            SobelAndDiZenzoCumaniKernel()
         ]
         
         super.init(frame: frame, device:  GPU.device)
@@ -54,13 +56,12 @@ class VideoView:MTKView {
         var inTexture = tmpTarget1
         var outTexture = kernels.isEmpty ? viewTarget : tmpTarget2
 
-        colorConvert.encodeToFragmentBuffer(commandBuffer, descriptor: outTexture.descriptor, yTexture: ytexture, cbcrTexture: cbcrTexture, destinationTexture: outTexture.texture)
-        //colorConvert.encodeToCommandBuffer(commandBuffer, yTexture: ytexture, cbcrTexture: cbcrTexture, destinationTexture: outTexture.texture)
+        colorConvert.encodeToBuffer(commandBuffer, descriptor: outTexture.descriptor, yTexture: ytexture, cbcrTexture: cbcrTexture, outTexture: outTexture.texture)
         
-        for kernel in kernels {
-            let last = kernel == kernels.last
+        for (index,kernel) in kernels.enumerate() {
+            let last = index == kernels.count - 1
             swap(&inTexture, &outTexture)
-            kernel.encodeToCommandBuffer(commandBuffer, sourceTexture: inTexture.texture, destinationTexture: (last ? viewTarget : outTexture).texture)
+            kernel.encodeToBuffer(commandBuffer, renderDescriptor: outTexture.descriptor, inTexture: inTexture.texture, outTexture: (last ? viewTarget : outTexture).texture)
         }
         
         commandBuffer.presentDrawable(drawable)

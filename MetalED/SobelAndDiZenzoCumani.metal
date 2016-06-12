@@ -1,5 +1,5 @@
 //
-//  SobelAndDiZenzoCumaniKernel.metal
+//  SobelAndDiZenzoCumani.metal
 //  MetalED
 //
 //  Created by Henrik Akesson on 16/05/2016.

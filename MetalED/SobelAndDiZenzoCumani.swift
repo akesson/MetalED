@@ -1,5 +1,5 @@
 //
-//  ImagePEL.swift
+//  SobelAndDiZenzoCumani.swift
 //  MetalPEL
 //
 //  Created by Henrik Akesson on 16/05/2016.
@@ -8,7 +8,7 @@
 
 import MetalPerformanceShaders
 
-public class ImageSobelAndDiZenzoCumani: MPSUnaryImageKernel {
+public class SobelAndDiZenzoCumaniKernel: MPSUnaryImageKernel {
     
     let commandEncoder:CommandEncoder
     
