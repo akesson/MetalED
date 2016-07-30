@@ -12,7 +12,6 @@ class VideoViewController: UIViewController {
     
     var video:Video!
     let videoView = VideoView(frame: CGRectZero)
-    let buffer = VideoBuffer()
     var timer: NSTimer?
     
     override func viewDidLoad() {
@@ -22,15 +21,11 @@ class VideoViewController: UIViewController {
         timer = NSTimer.scheduledTimerWithTimeInterval(Double(1.0/video.frameRate), target: self, selector: #selector(VideoViewController.nextFrame), userInfo: nil, repeats: true)
         
         nextFrame()
-        /*
-        camera.delegate = videoView.videoBuffer
-        camera.running = true
-        */
     }
     
     func nextFrame() {
         if let frame = video.nextFrame() {
-            buffer.captureBuffer(frame)
+            videoView.videoBuffer.captureBuffer(frame)
         } else {
             timer?.invalidate()
             print("Finished video")
