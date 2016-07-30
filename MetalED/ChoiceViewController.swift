@@ -49,7 +49,16 @@ extension ChoiceViewController: UIImagePickerControllerDelegate {
         dismissViewControllerAnimated(true) {
             if mediaType == kUTTypeMovie {
                 let videoURL = info[UIImagePickerControllerMediaURL] as! NSURL
-                print("video: \(videoURL)")
+                let video = Video(url: videoURL)
+                var count = 0
+                let start = NSDate()
+                while video.nextFrame() != nil {
+                    count += 1
+                }
+                let end = NSDate()
+                let time = end.timeIntervalSinceDate(start)
+                let msPerFrame = time * 1000 / Double(count)
+                print("Frames: \(count) frames in \(Int(msPerFrame))ms/frame")
                 //TODO call method that decompresses the video and send it to the metal
             }
         }

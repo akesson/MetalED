@@ -29,6 +29,7 @@
 		C34F48C41D03639500E6E0D4 /* FullScreenVertexes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34F48C31D03639500E6E0D4 /* FullScreenVertexes.swift */; };
 		C35DD18B1D04A8DE009AB813 /* RenderTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35DD18A1D04A8DE009AB813 /* RenderTarget.swift */; };
 		C3949C421D4C9F5600D3C001 /* ChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3949C411D4C9F5600D3C001 /* ChoiceViewController.swift */; };
+		C3949C441D4CAA4400D3C001 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3949C431D4CAA4400D3C001 /* Video.swift */; };
 		C3AC04FC1D0D7DBC00F24267 /* RenderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AC04FB1D0D7DBC00F24267 /* RenderProtocol.swift */; };
 		C3AC04FE1D0DA3F600F24267 /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AC04FD1D0DA3F600F24267 /* Encoder.swift */; };
 /* End PBXBuildFile section */
@@ -70,6 +71,7 @@
 		C34F48C31D03639500E6E0D4 /* FullScreenVertexes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenVertexes.swift; sourceTree = "<group>"; };
 		C35DD18A1D04A8DE009AB813 /* RenderTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderTarget.swift; sourceTree = "<group>"; };
 		C3949C411D4C9F5600D3C001 /* ChoiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceViewController.swift; sourceTree = "<group>"; };
+		C3949C431D4CAA4400D3C001 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		C3AC04FB1D0D7DBC00F24267 /* RenderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderProtocol.swift; sourceTree = "<group>"; };
 		C3AC04FD1D0DA3F600F24267 /* Encoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Encoder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,6 +125,7 @@
 				C34F48BF1D0349FA00E6E0D4 /* GPU.swift */,
 				C34F48C11D035F1200E6E0D4 /* StandardExtensions.swift */,
 				C3949C411D4C9F5600D3C001 /* ChoiceViewController.swift */,
+				C3949C431D4CAA4400D3C001 /* Video.swift */,
 			);
 			path = MetalED;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				C34F48BC1D03304F00E6E0D4 /* CommandEncoder.swift in Sources */,
 				C33A685A1CE8D7BC00484F76 /* VideoBuffer.swift in Sources */,
 				C3AC04FE1D0DA3F600F24267 /* Encoder.swift in Sources */,
+				C3949C441D4CAA4400D3C001 /* Video.swift in Sources */,
 				C3AC04FC1D0D7DBC00F24267 /* RenderProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
