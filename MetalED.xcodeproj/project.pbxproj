@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C33A68321CE7B17500484F76 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A68311CE7B17500484F76 /* AppDelegate.swift */; };
-		C33A68341CE7B17500484F76 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A68331CE7B17500484F76 /* ViewController.swift */; };
+		C33A68341CE7B17500484F76 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A68331CE7B17500484F76 /* VideoViewController.swift */; };
 		C33A68371CE7B17500484F76 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C33A68351CE7B17500484F76 /* Main.storyboard */; };
 		C33A68391CE7B17500484F76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C33A68381CE7B17500484F76 /* Assets.xcassets */; };
 		C33A683C1CE7B17500484F76 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C33A683A1CE7B17500484F76 /* LaunchScreen.storyboard */; };
@@ -28,6 +28,7 @@
 		C34F48C21D035F1200E6E0D4 /* StandardExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34F48C11D035F1200E6E0D4 /* StandardExtensions.swift */; };
 		C34F48C41D03639500E6E0D4 /* FullScreenVertexes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34F48C31D03639500E6E0D4 /* FullScreenVertexes.swift */; };
 		C35DD18B1D04A8DE009AB813 /* RenderTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35DD18A1D04A8DE009AB813 /* RenderTarget.swift */; };
+		C3949C421D4C9F5600D3C001 /* ChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3949C411D4C9F5600D3C001 /* ChoiceViewController.swift */; };
 		C3AC04FC1D0D7DBC00F24267 /* RenderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AC04FB1D0D7DBC00F24267 /* RenderProtocol.swift */; };
 		C3AC04FE1D0DA3F600F24267 /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AC04FD1D0DA3F600F24267 /* Encoder.swift */; };
 /* End PBXBuildFile section */
@@ -45,7 +46,7 @@
 /* Begin PBXFileReference section */
 		C33A682E1CE7B17500484F76 /* MetalED.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalED.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33A68311CE7B17500484F76 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C33A68331CE7B17500484F76 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C33A68331CE7B17500484F76 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		C33A68361CE7B17500484F76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C33A68381CE7B17500484F76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C33A683B1CE7B17500484F76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -68,6 +69,7 @@
 		C34F48C11D035F1200E6E0D4 /* StandardExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardExtensions.swift; sourceTree = "<group>"; };
 		C34F48C31D03639500E6E0D4 /* FullScreenVertexes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenVertexes.swift; sourceTree = "<group>"; };
 		C35DD18A1D04A8DE009AB813 /* RenderTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderTarget.swift; sourceTree = "<group>"; };
+		C3949C411D4C9F5600D3C001 /* ChoiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceViewController.swift; sourceTree = "<group>"; };
 		C3AC04FB1D0D7DBC00F24267 /* RenderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderProtocol.swift; sourceTree = "<group>"; };
 		C3AC04FD1D0DA3F600F24267 /* Encoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Encoder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,13 +115,14 @@
 			children = (
 				C33A68581CE8C56C00484F76 /* Resources */,
 				C33A685F1CEA2FE700484F76 /* Shaders */,
-				C33A68331CE7B17500484F76 /* ViewController.swift */,
+				C33A68331CE7B17500484F76 /* VideoViewController.swift */,
 				C33A68511CE7B33C00484F76 /* CameraController.swift */,
 				C33A68531CE7BF9C00484F76 /* VideoView.swift */,
 				C33A68591CE8D7BC00484F76 /* VideoBuffer.swift */,
 				C34F48C31D03639500E6E0D4 /* FullScreenVertexes.swift */,
 				C34F48BF1D0349FA00E6E0D4 /* GPU.swift */,
 				C34F48C11D035F1200E6E0D4 /* StandardExtensions.swift */,
+				C3949C411D4C9F5600D3C001 /* ChoiceViewController.swift */,
 			);
 			path = MetalED;
 			sourceTree = "<group>";
@@ -221,7 +224,7 @@
 				TargetAttributes = {
 					C33A682D1CE7B17500484F76 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 6B3J5WUHQS;
+						DevelopmentTeam = 7EDQX9KG84;
 					};
 					C33A68411CE7B17500484F76 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -280,8 +283,9 @@
 				C33A68541CE7BF9C00484F76 /* VideoView.swift in Sources */,
 				C33A68521CE7B33C00484F76 /* CameraController.swift in Sources */,
 				C34CFE171D04415400812597 /* Common.metal in Sources */,
+				C3949C421D4C9F5600D3C001 /* ChoiceViewController.swift in Sources */,
 				C33A685C1CEA218600484F76 /* SobelAndDiZenzoCumani.metal in Sources */,
-				C33A68341CE7B17500484F76 /* ViewController.swift in Sources */,
+				C33A68341CE7B17500484F76 /* VideoViewController.swift in Sources */,
 				C35DD18B1D04A8DE009AB813 /* RenderTarget.swift in Sources */,
 				C33A68571CE8C14500484F76 /* YCbCr2RGB.metal in Sources */,
 				C33A68321CE7B17500484F76 /* AppDelegate.swift in Sources */,

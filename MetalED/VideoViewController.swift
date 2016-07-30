@@ -9,7 +9,7 @@
 import UIKit
 
 
-class ViewController: UIViewController {
+class VideoViewController: UIViewController {
 
     let camera = CameraController()
     let videoView = VideoView(frame: CGRectZero)
@@ -27,6 +27,10 @@ class ViewController: UIViewController {
         videoView.frame = view.bounds
         videoView.drawableSize = CGSize(width: view.bounds.width * 2, height: view.bounds.height * 2)
         print("frame: \(videoView.frame) drawableSize: \(videoView.drawableSize)")
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return .LandscapeLeft
     }
 }
 
