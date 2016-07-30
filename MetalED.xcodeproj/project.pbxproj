@@ -32,6 +32,7 @@
 		C3949C441D4CAA4400D3C001 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3949C431D4CAA4400D3C001 /* Video.swift */; };
 		C3AC04FC1D0D7DBC00F24267 /* RenderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AC04FB1D0D7DBC00F24267 /* RenderProtocol.swift */; };
 		C3AC04FE1D0DA3F600F24267 /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AC04FD1D0DA3F600F24267 /* Encoder.swift */; };
+		C3BB60631D4CE178009F448C /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BB60621D4CE178009F448C /* VideoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		C3949C431D4CAA4400D3C001 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		C3AC04FB1D0D7DBC00F24267 /* RenderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderProtocol.swift; sourceTree = "<group>"; };
 		C3AC04FD1D0DA3F600F24267 /* Encoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Encoder.swift; sourceTree = "<group>"; };
+		C3BB60621D4CE178009F448C /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				C34F48C11D035F1200E6E0D4 /* StandardExtensions.swift */,
 				C3949C411D4C9F5600D3C001 /* ChoiceViewController.swift */,
 				C3949C431D4CAA4400D3C001 /* Video.swift */,
+				C3BB60621D4CE178009F448C /* VideoViewController.swift */,
 			);
 			path = MetalED;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				C34F48C41D03639500E6E0D4 /* FullScreenVertexes.swift in Sources */,
 				C33A68541CE7BF9C00484F76 /* VideoView.swift in Sources */,
 				C33A68521CE7B33C00484F76 /* CameraController.swift in Sources */,
+				C3BB60631D4CE178009F448C /* VideoViewController.swift in Sources */,
 				C34CFE171D04415400812597 /* Common.metal in Sources */,
 				C3949C421D4C9F5600D3C001 /* ChoiceViewController.swift in Sources */,
 				C33A685C1CEA218600484F76 /* SobelAndDiZenzoCumani.metal in Sources */,

@@ -14,6 +14,7 @@ struct Video {
     
     let assetReader: AVAssetReader
     let trackOutput: AVAssetReaderTrackOutput
+    let frameRate:Float
     
     init(url: NSURL) {
         let asset = AVURLAsset(URL: url, options: nil)
@@ -22,7 +23,9 @@ struct Video {
         if track.mediaType != "vide" {
             print("Track wasnt a video")
         }
-        let settings: [String : AnyObject] = [kCVPixelBufferPixelFormatTypeKey as String : NSNumber(unsignedInt: kCVPixelFormatType_32BGRA)]
+        frameRate = track.nominalFrameRate
+        
+        let settings: [String : AnyObject] = [kCVPixelBufferPixelFormatTypeKey as String : NSNumber(unsignedInt: kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange)]
         
         trackOutput = AVAssetReaderTrackOutput(track: track, outputSettings: settings)
 

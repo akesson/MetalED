@@ -11,6 +11,8 @@ import MobileCoreServices
 
 class ChoiceViewController: UIViewController {
 
+    var video: Video?
+    
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return .Portrait
     }
@@ -49,18 +51,30 @@ extension ChoiceViewController: UIImagePickerControllerDelegate {
         dismissViewControllerAnimated(true) {
             if mediaType == kUTTypeMovie {
                 let videoURL = info[UIImagePickerControllerMediaURL] as! NSURL
-                let video = Video(url: videoURL)
+                self.video = Video(url: videoURL)
+   
+                /*
                 var count = 0
                 let start = NSDate()
-                while video.nextFrame() != nil {
+                while self.video!.nextFrame() != nil {
                     count += 1
                 }
                 let end = NSDate()
                 let time = end.timeIntervalSinceDate(start)
                 let msPerFrame = time * 1000 / Double(count)
                 print("Frames: \(count) frames in \(Int(msPerFrame))ms/frame")
-                //TODO call method that decompresses the video and send it to the metal
+                 */
+                self.performSegueWithIdentifier("segueToVideoViewController", sender: self)
             }
+        }
+    }
+}
+
+extension ChoiceViewController {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "segueToVideoViewController" {
+            let controller = segue.destinationViewController as! VideoViewController
+            controller.video = self.video
         }
     }
 }

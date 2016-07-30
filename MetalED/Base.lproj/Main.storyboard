@@ -23,6 +23,24 @@
             </objects>
             <point key="canvasLocation" x="1283" y="742"/>
         </scene>
+        <!--Video View Controller-->
+        <scene sceneID="2pj-gM-pdh">
+            <objects>
+                <viewController id="6Pv-Cg-QhC" customClass="VideoViewController" customModule="MetalED" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OxA-8N-PUh"/>
+                        <viewControllerLayoutGuide type="bottom" id="9gX-w2-Jt6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EVU-zC-Pem">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eQ5-dl-C80" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1283" y="1487"/>
+        </scene>
         <!--Choice View Controller-->
         <scene sceneID="oPP-nd-dS8">
             <objects>
@@ -40,7 +58,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Camera"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="segueToVideoViewController" id="3aR-yy-dwC"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="segueToCameraViewController" id="3aR-yy-dwC"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbk-Wk-egj">
@@ -60,6 +78,9 @@
                             <constraint firstItem="fbk-Wk-egj" firstAttribute="centerX" secondItem="Ys0-Xa-LhX" secondAttribute="centerX" id="eA7-5X-hSJ"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <segue destination="6Pv-Cg-QhC" kind="show" identifier="segueToVideoViewController" id="GHx-9v-HtJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kph-Ag-qyf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
