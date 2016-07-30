@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C33A68321CE7B17500484F76 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A68311CE7B17500484F76 /* AppDelegate.swift */; };
-		C33A68341CE7B17500484F76 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A68331CE7B17500484F76 /* VideoViewController.swift */; };
+		C33A68341CE7B17500484F76 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A68331CE7B17500484F76 /* CameraViewController.swift */; };
 		C33A68371CE7B17500484F76 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C33A68351CE7B17500484F76 /* Main.storyboard */; };
 		C33A68391CE7B17500484F76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C33A68381CE7B17500484F76 /* Assets.xcassets */; };
 		C33A683C1CE7B17500484F76 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C33A683A1CE7B17500484F76 /* LaunchScreen.storyboard */; };
@@ -47,7 +47,7 @@
 /* Begin PBXFileReference section */
 		C33A682E1CE7B17500484F76 /* MetalED.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalED.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33A68311CE7B17500484F76 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C33A68331CE7B17500484F76 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		C33A68331CE7B17500484F76 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		C33A68361CE7B17500484F76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C33A68381CE7B17500484F76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C33A683B1CE7B17500484F76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 			children = (
 				C33A68581CE8C56C00484F76 /* Resources */,
 				C33A685F1CEA2FE700484F76 /* Shaders */,
-				C33A68331CE7B17500484F76 /* VideoViewController.swift */,
+				C33A68331CE7B17500484F76 /* CameraViewController.swift */,
 				C33A68511CE7B33C00484F76 /* CameraController.swift */,
 				C33A68531CE7BF9C00484F76 /* VideoView.swift */,
 				C33A68591CE8D7BC00484F76 /* VideoBuffer.swift */,
@@ -288,7 +288,7 @@
 				C34CFE171D04415400812597 /* Common.metal in Sources */,
 				C3949C421D4C9F5600D3C001 /* ChoiceViewController.swift in Sources */,
 				C33A685C1CEA218600484F76 /* SobelAndDiZenzoCumani.metal in Sources */,
-				C33A68341CE7B17500484F76 /* VideoViewController.swift in Sources */,
+				C33A68341CE7B17500484F76 /* CameraViewController.swift in Sources */,
 				C35DD18B1D04A8DE009AB813 /* RenderTarget.swift in Sources */,
 				C33A68571CE8C14500484F76 /* YCbCr2RGB.metal in Sources */,
 				C33A68321CE7B17500484F76 /* AppDelegate.swift in Sources */,

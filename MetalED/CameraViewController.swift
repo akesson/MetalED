@@ -9,7 +9,7 @@
 import UIKit
 
 
-class VideoViewController: UIViewController {
+class CameraViewController: UIViewController {
 
     let camera = CameraController()
     let videoView = VideoView(frame: CGRectZero)
