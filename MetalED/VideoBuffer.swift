@@ -15,7 +15,8 @@ class VideoBuffer: CameraCaptureDelegate {
     
     var yTexture:MTLTexture?
     var cbcrTexture: MTLTexture?
-
+    var frameNumber = 0
+    
     var videoTextureCache : Unmanaged<CVMetalTextureCacheRef>?
     
     init() {
@@ -25,11 +26,10 @@ class VideoBuffer: CameraCaptureDelegate {
         
         // Texture for CbCr
         CVMetalTextureCacheCreate(kCFAllocatorDefault, nil, device, nil, &videoTextureCache)
-        
     }
     
-    func captureBuffer(sampleBuffer: CMSampleBuffer!) {
-        
+    func captureBuffer(sampleBuffer: CMSampleBuffer!, frameNumber: Int) {
+        self.frameNumber = frameNumber
         let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
         
         // Y: luma
