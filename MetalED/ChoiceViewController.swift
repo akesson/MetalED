@@ -13,6 +13,11 @@ class ChoiceViewController: UIViewController {
 
     var video: Video?
     
+    override func viewWillDisappear(animated: Bool) {
+        //cleanup temporary videos created by the image picker
+        try! Directory.temporary().deleteAll()
+    }
+    
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return .Portrait
     }
@@ -35,7 +40,6 @@ class ChoiceViewController: UIViewController {
         presentViewController(mediaUI, animated: true, completion: nil)
         return true
     }
-
 }
 
 
@@ -52,18 +56,6 @@ extension ChoiceViewController: UIImagePickerControllerDelegate {
             if mediaType == kUTTypeMovie {
                 let videoURL = info[UIImagePickerControllerMediaURL] as! NSURL
                 self.video = Video(url: videoURL)
-   
-                /*
-                var count = 0
-                let start = NSDate()
-                while self.video!.nextFrame() != nil {
-                    count += 1
-                }
-                let end = NSDate()
-                let time = end.timeIntervalSinceDate(start)
-                let msPerFrame = time * 1000 / Double(count)
-                print("Frames: \(count) frames in \(Int(msPerFrame))ms/frame")
-                 */
                 self.performSegueWithIdentifier("segueToVideoViewController", sender: self)
             }
         }

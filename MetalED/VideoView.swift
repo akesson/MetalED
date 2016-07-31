@@ -19,6 +19,7 @@ class VideoView:MTKView {
     var viewTarget: RenderTarget { //always recreated as the drawable is uing double buffering
         return RenderTarget(self.currentDrawable!.texture, self.currentRenderPassDescriptor!)
     }
+    private var _frameNumber = 0
     
     let kernels:[RenderProtocol];
 
@@ -66,5 +67,7 @@ class VideoView:MTKView {
         
         commandBuffer.presentDrawable(drawable)
         commandBuffer.commit();
+        assert(videoBuffer.frameNumber >= _frameNumber)
+        _frameNumber = videoBuffer.frameNumber
     }
 }

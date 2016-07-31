@@ -18,16 +18,16 @@ class VideoViewController: UIViewController {
         super.viewDidLoad()
         
         view.addSubview(videoView)
-        timer = NSTimer.scheduledTimerWithTimeInterval(Double(1.0/video.frameRate), target: self, selector: #selector(VideoViewController.nextFrame), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(Double(3.0/video.frameRate), target: self, selector: #selector(VideoViewController.nextFrame), userInfo: nil, repeats: true)
         
         nextFrame()
     }
     
     func nextFrame() {
-        if let frame = video.nextFrame() {
-            videoView.videoBuffer.captureBuffer(frame)
+        if let frame = self.video.nextFrame() {
+            self.videoView.videoBuffer.captureBuffer(frame, frameNumber: self.video.frameNumber)
         } else {
-            timer?.invalidate()
+            self.timer?.invalidate()
             print("Finished video")
         }
     }

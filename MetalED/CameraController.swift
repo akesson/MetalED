@@ -10,7 +10,7 @@ import Foundation
 import AVFoundation
 
 protocol CameraCaptureDelegate {
-    func captureBuffer(sampleBuffer:CMSampleBuffer!)
+    func captureBuffer(sampleBuffer:CMSampleBuffer!, frameNumber: Int)
 }
 
 class CameraController:NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
@@ -57,6 +57,6 @@ class CameraController:NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
         connection.videoOrientation = AVCaptureVideoOrientation.LandscapeLeft
-        delegate?.captureBuffer(sampleBuffer)
+        delegate?.captureBuffer(sampleBuffer, frameNumber: 0)
     }
 }
