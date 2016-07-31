@@ -18,7 +18,7 @@ class VideoViewController: UIViewController {
         super.viewDidLoad()
         
         view.addSubview(videoView)
-        timer = NSTimer.scheduledTimerWithTimeInterval(Double(3.0/video.frameRate), target: self, selector: #selector(VideoViewController.nextFrame), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(Double(1.0/video.frameRate), target: self, selector: #selector(VideoViewController.nextFrame), userInfo: nil, repeats: true)
         
         nextFrame()
     }

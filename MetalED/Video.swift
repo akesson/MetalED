@@ -9,12 +9,13 @@
 import UIKit
 import Foundation
 import AVFoundation
+import VideoToolbox
 
 struct Video {
     
     let url: NSURL
     let assetReader: AVAssetReader
-    let trackOutput: AVAssetReaderTrackOutput
+    let trackOutput: AVAssetReaderVideoCompositionOutput
     let frameRate:Float
     
     var frameNumber:Int { return _frameNumber }
@@ -28,13 +29,15 @@ struct Video {
         if track.mediaType != "vide" {
             print("Track wasnt a video")
         }
+
         frameRate = track.nominalFrameRate
         print("FPS: \(frameRate)")
         
         let settings: [String : AnyObject] = [kCVPixelBufferPixelFormatTypeKey as String : NSNumber(unsignedInt: kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange)]
         
-        trackOutput = AVAssetReaderTrackOutput(track: track, outputSettings: settings)
-
+        trackOutput = AVAssetReaderVideoCompositionOutput(videoTracks: [asset.tracks[1]], videoSettings: settings)
+        trackOutput.videoComposition = AVMutableVideoComposition(propertiesOfAsset: asset)
+        
         assetReader = try! AVAssetReader(asset: asset)
         assert(assetReader.canAddOutput(trackOutput))
         
@@ -53,7 +56,8 @@ struct Video {
             assert(assetReader.status == .Reading)
         }
         _frameNumber += 1
-        return trackOutput.copyNextSampleBuffer()
+        let sampleBuffer = trackOutput.copyNextSampleBuffer()
+        return sampleBuffer
     }
     
     func cleanup() {
