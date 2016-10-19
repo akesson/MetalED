@@ -11,36 +11,36 @@ import MetalKit
 /* Represents the single GPU of the phone (will not use multi-GPU stuff) */
 final class GPU {
     
-    private static var compiledFunctions = [String:MTLFunction]()
+    fileprivate static var compiledFunctions = [String:MTLFunction]()
     
     static let device = MTLCreateSystemDefaultDevice()!
     static let library = device.newDefaultLibrary()!
-    static let commandQueue = device.newCommandQueue()
+    static let commandQueue = device.makeCommandQueue()
     
-    static func computePipelineStateFor(function: String) -> MTLComputePipelineState {
+    static func computePipelineStateFor(_ function: String) -> MTLComputePipelineState {
         let computeFunction = getFunction(function)
         var computePipelineState: MTLComputePipelineState
         do {
-            try computePipelineState = device.newComputePipelineStateWithFunction(computeFunction)
+            try computePipelineState = device.makeComputePipelineState(function: computeFunction)
         } catch {
             fatalError("Error occurred when compiling compute pipeline: \(error)")
         }
         return computePipelineState
     }
     
-    static func renderPipelineStateFor(name: String, vertexFunction: String, fragmentFunction: String) -> MTLRenderPipelineState {
+    static func renderPipelineStateFor(_ name: String, vertexFunction: String, fragmentFunction: String) -> MTLRenderPipelineState {
         // create a pipeline state descriptor for a vertex/fragment shader combo
         let descriptor = MTLRenderPipelineDescriptor()
         descriptor.label = name
         descriptor.vertexFunction = getFunction(vertexFunction)
         descriptor.fragmentFunction = getFunction(fragmentFunction)
-        descriptor.colorAttachments[0].pixelFormat = .BGRA8Unorm
+        descriptor.colorAttachments[0].pixelFormat = .bgra8Unorm
         descriptor.vertexDescriptor = FullScreenVertexes.descriptor
         
         // create the actual pipeline state
         var info:MTLRenderPipelineReflection? = nil
         do {
-            let pipelineState = try device.newRenderPipelineStateWithDescriptor(descriptor, options: MTLPipelineOption.BufferTypeInfo, reflection: &info)
+            let pipelineState = try device.makeRenderPipelineState(descriptor: descriptor, options: MTLPipelineOption.bufferTypeInfo, reflection: &info)
             return pipelineState
             
         } catch let pipelineError as NSError {
@@ -48,35 +48,35 @@ final class GPU {
         }
     }
     
-    static func getFunction(name: String) -> MTLFunction {
+    static func getFunction(_ name: String) -> MTLFunction {
         return compiledFunctions.lookupOrAdd(name) { newFunction(name) }
     }
     
-    private static func newFunction(name: String) -> MTLFunction {
-        guard let function = library.newFunctionWithName(name) else {
+    fileprivate static func newFunction(_ name: String) -> MTLFunction {
+        guard let function = library.makeFunction(name: name) else {
             fatalError("Failed to retrieve kernel function \(name) from library")
         }
         return function;
     }
     
-    static func newSamplerState(descriptor: MTLSamplerDescriptor) -> MTLSamplerState {
-        return device.newSamplerStateWithDescriptor(descriptor)
+    static func newSamplerState(_ descriptor: MTLSamplerDescriptor) -> MTLSamplerState {
+        return device.makeSamplerState(descriptor: descriptor)
     }
  
-    static func newTexture(width width: Int, height: Int) -> MTLTexture {
-        let desc = MTLTextureDescriptor.texture2DDescriptorWithPixelFormat(MTLPixelFormat.BGRA8Unorm, width: width, height: height, mipmapped: false)
-        return device.newTextureWithDescriptor(desc)
+    static func newTexture(width: Int, height: Int) -> MTLTexture {
+        let desc = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: MTLPixelFormat.bgra8Unorm, width: width, height: height, mipmapped: false)
+        return device.makeTexture(descriptor: desc)
     }
     
-    static func newBuffer(data:[Float]) -> MTLBuffer {
+    static func newBuffer(_ data:[Float]) -> MTLBuffer {
         // set up vertex buffer
-        let dataSize = data.count * sizeofValue(data[0]) // 1
+        let dataSize = data.count * MemoryLayout.size(ofValue: data[0]) // 1
         
-        let options:MTLResourceOptions = MTLResourceOptions.StorageModeShared.union(MTLResourceOptions.CPUCacheModeDefaultCache)
-        return device.newBufferWithBytes(data, length: dataSize, options: options)
+        let options:MTLResourceOptions = MTLResourceOptions.storageModeShared.union([])
+        return device.makeBuffer(bytes: data, length: dataSize, options: options)
     }
     
     static func commandBuffer() -> MTLCommandBuffer {
-        return commandQueue.commandBuffer()
+        return commandQueue.makeCommandBuffer()
     }
 }

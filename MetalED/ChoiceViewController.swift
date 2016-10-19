@@ -13,31 +13,31 @@ class ChoiceViewController: UIViewController {
 
     var video: Video?
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         //cleanup temporary videos created by the image picker
         try! Directory.temporary().deleteAll()
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return .Portrait
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return .portrait
     }
     
     @IBAction func onVideoTapped() {
         startMediaBrowserFromViewController(self, usingDelegate: self)
     }
     
-    func startMediaBrowserFromViewController(viewController: UIViewController, usingDelegate delegate: protocol<UINavigationControllerDelegate, UIImagePickerControllerDelegate>) -> Bool {
-        if UIImagePickerController.isSourceTypeAvailable(.SavedPhotosAlbum) == false {
+    func startMediaBrowserFromViewController(_ viewController: UIViewController, usingDelegate delegate: UINavigationControllerDelegate & UIImagePickerControllerDelegate) -> Bool {
+        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) == false {
             return false
         }
         
         let mediaUI = UIImagePickerController()
-        mediaUI.sourceType = .SavedPhotosAlbum
+        mediaUI.sourceType = .savedPhotosAlbum
         mediaUI.mediaTypes = [kUTTypeMovie as NSString as String]
         mediaUI.allowsEditing = true
         mediaUI.delegate = delegate
         
-        presentViewController(mediaUI, animated: true, completion: nil)
+        present(mediaUI, animated: true, completion: nil)
         return true
     }
 }
@@ -49,23 +49,23 @@ extension ChoiceViewController: UINavigationControllerDelegate {
 
 // MARK: - UIImagePickerControllerDelegate
 extension ChoiceViewController: UIImagePickerControllerDelegate {
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         
-        dismissViewControllerAnimated(true) {
+        dismiss(animated: true) {
             if mediaType == kUTTypeMovie {
-                let videoURL = info[UIImagePickerControllerMediaURL] as! NSURL
+                let videoURL = info[UIImagePickerControllerMediaURL] as! URL
                 self.video = Video(url: videoURL)
-                self.performSegueWithIdentifier("segueToVideoViewController", sender: self)
+                self.performSegue(withIdentifier: "segueToVideoViewController", sender: self)
             }
         }
     }
 }
 
 extension ChoiceViewController {
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToVideoViewController" {
-            let controller = segue.destinationViewController as! VideoViewController
+            let controller = segue.destination as! VideoViewController
             controller.video = self.video
         }
     }

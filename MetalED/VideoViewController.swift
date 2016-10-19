@@ -11,14 +11,14 @@ import UIKit
 class VideoViewController: UIViewController {
     
     var video:Video!
-    let videoView = VideoView(frame: CGRectZero)
-    var timer: NSTimer?
+    let videoView = VideoView(frame: CGRect.zero)
+    var timer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.addSubview(videoView)
-        timer = NSTimer.scheduledTimerWithTimeInterval(Double(1.0/video.frameRate), target: self, selector: #selector(VideoViewController.nextFrame), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: Double(1.0/video.frameRate), target: self, selector: #selector(VideoViewController.nextFrame), userInfo: nil, repeats: true)
         
         nextFrame()
     }
@@ -38,7 +38,7 @@ class VideoViewController: UIViewController {
         print("frame: \(videoView.frame) drawableSize: \(videoView.drawableSize)")
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return .LandscapeLeft
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return .landscapeLeft
     }
 }

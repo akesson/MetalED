@@ -18,7 +18,7 @@ class Encoder {
         self.threadsPerThreadgroup = threadsPerThreadgroup
     }
     
-    func threadgroupsPerGridFromTexture(texture: MTLTexture) -> MTLSize {
+    func threadgroupsPerGridFromTexture(_ texture: MTLTexture) -> MTLSize {
         // Determine how many threadgroups we need to dispatch to fully cover the destination region
         // There will almost certainly be some wasted threads except when both textures are neat
         // multiples of the thread-per-threadgroup size and the offset and clip region are agreeable.

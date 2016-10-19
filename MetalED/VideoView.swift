@@ -19,7 +19,7 @@ class VideoView:MTKView {
     var viewTarget: RenderTarget { //always recreated as the drawable is uing double buffering
         return RenderTarget(self.currentDrawable!.texture, self.currentRenderPassDescriptor!)
     }
-    private var _frameNumber = 0
+    fileprivate var _frameNumber = 0
     
     let kernels:[RenderProtocol];
 
@@ -47,8 +47,8 @@ class VideoView:MTKView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func drawRect(dirtyRect: CGRect) {
-        guard let drawable = currentDrawable, ytexture = videoBuffer.yTexture, cbcrTexture = videoBuffer.cbcrTexture else {
+    override func draw(_ dirtyRect: CGRect) {
+        guard let drawable = currentDrawable, let ytexture = videoBuffer.yTexture, let cbcrTexture = videoBuffer.cbcrTexture else {
             return
         }
         
@@ -57,15 +57,15 @@ class VideoView:MTKView {
         var inTexture = tmpTarget1
         var outTexture = kernels.isEmpty ? viewTarget : tmpTarget2
 
-        colorConvert.encodeToBuffer(commandBuffer, descriptor: outTexture.descriptor, yTexture: ytexture, cbcrTexture: cbcrTexture, outTexture: outTexture.texture)
+        colorConvert.encodeToBuffer(commandBuffer, descriptor: (outTexture?.descriptor)!, yTexture: ytexture, cbcrTexture: cbcrTexture, outTexture: (outTexture?.texture)!)
         
-        for (index,kernel) in kernels.enumerate() {
+        for (index,kernel) in kernels.enumerated() {
             let last = index == kernels.count - 1
             swap(&inTexture, &outTexture)
-            kernel.encodeToBuffer(commandBuffer, renderDescriptor: outTexture.descriptor, inTexture: inTexture.texture, outTexture: (last ? viewTarget : outTexture).texture)
+            kernel.encodeToBuffer(commandBuffer, renderDescriptor: (outTexture?.descriptor)!, inTexture: (inTexture?.texture)!, outTexture: (last ? viewTarget : outTexture!).texture)
         }
         
-        commandBuffer.presentDrawable(drawable)
+        commandBuffer.present(drawable)
         commandBuffer.commit();
         assert(videoBuffer.frameNumber >= _frameNumber)
         _frameNumber = videoBuffer.frameNumber

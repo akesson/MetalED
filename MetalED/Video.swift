@@ -13,16 +13,16 @@ import VideoToolbox
 
 struct Video {
     
-    let url: NSURL
+    let url: URL
     let assetReader: AVAssetReader
     let trackOutput: AVAssetReaderVideoCompositionOutput
     let frameRate:Float
     
     var frameNumber:Int { return _frameNumber }
-    private var _frameNumber = 0
+    fileprivate var _frameNumber = 0
     
-    init(url: NSURL) {
-        let asset = AVURLAsset(URL: url, options: nil)
+    init(url: URL) {
+        let asset = AVURLAsset(url: url, options: nil)
         self.url = url
         
         let track = asset.tracks[1]
@@ -33,27 +33,27 @@ struct Video {
         frameRate = track.nominalFrameRate
         print("FPS: \(frameRate)")
         
-        let settings: [String : AnyObject] = [kCVPixelBufferPixelFormatTypeKey as String : NSNumber(unsignedInt: kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange)]
+        let settings: [String : AnyObject] = [kCVPixelBufferPixelFormatTypeKey as String : NSNumber(value: kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange as UInt32)]
         
         trackOutput = AVAssetReaderVideoCompositionOutput(videoTracks: [asset.tracks[1]], videoSettings: settings)
-        trackOutput.videoComposition = AVMutableVideoComposition(propertiesOfAsset: asset)
+        trackOutput.videoComposition = AVMutableVideoComposition(propertiesOf: asset)
         
         assetReader = try! AVAssetReader(asset: asset)
-        assert(assetReader.canAddOutput(trackOutput))
+        assert(assetReader.canAdd(trackOutput))
         
-        assetReader.addOutput(trackOutput)
+        assetReader.add(trackOutput)
     }
 
 
     mutating func nextFrame() -> CMSampleBuffer? {
-        if (assetReader.status == .Completed) {
+        if (assetReader.status == .completed) {
             cleanup()
             return nil
         }
         
-        if (assetReader.status != .Reading) {
+        if (assetReader.status != .reading) {
             assert(assetReader.startReading())
-            assert(assetReader.status == .Reading)
+            assert(assetReader.status == .reading)
         }
         _frameNumber += 1
         let sampleBuffer = trackOutput.copyNextSampleBuffer()
@@ -61,8 +61,8 @@ struct Video {
     }
     
     func cleanup() {
-        if url.checkResourceIsReachableAndReturnError(nil) {
-            try! NSFileManager.defaultManager().removeItemAtURL(url)
+        if (url as NSURL).checkResourceIsReachableAndReturnError(nil) {
+            try! FileManager.default.removeItem(at: url)
         }
     }
 }

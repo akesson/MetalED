@@ -9,18 +9,18 @@
 import MetalPerformanceShaders
 
 protocol YCbCr2RGB {
-    func encodeToBuffer(commandBuffer: MTLCommandBuffer,
+    func encodeToBuffer(_ commandBuffer: MTLCommandBuffer,
                         descriptor: MTLRenderPassDescriptor,
                         yTexture: MTLTexture,
                         cbcrTexture: MTLTexture,
                         outTexture: MTLTexture)
 }
 
-public class YCbCr2RGBKernel: YCbCr2RGB {
+open class YCbCr2RGBKernel: YCbCr2RGB {
     
     let commandEncoder = CommandEncoder(kernelName: "YCbCr2RGB_Kernel", threadsPerThreadgroup: MTLSizeMake(16, 16, 1))
     
-    public func encodeToBuffer(commandBuffer: MTLCommandBuffer,
+    open func encodeToBuffer(_ commandBuffer: MTLCommandBuffer,
                                descriptor: MTLRenderPassDescriptor,
                                yTexture: MTLTexture,
                                cbcrTexture: MTLTexture,
@@ -32,11 +32,11 @@ public class YCbCr2RGBKernel: YCbCr2RGB {
 }
 
 
-public class YCbCr2RGBFragment: YCbCr2RGB {
+open class YCbCr2RGBFragment: YCbCr2RGB {
     
     let renderEncoder = RenderEncoder(renderName: "YCbCr2RGB", vertexFunction: "defaultVertex", fragmentFunction: "YCbCr2RGB_Fragment", threadsPerThreadgroup: MTLSizeMake(16, 16, 1))
     
-    public func encodeToBuffer(commandBuffer: MTLCommandBuffer,
+    open func encodeToBuffer(_ commandBuffer: MTLCommandBuffer,
                                descriptor: MTLRenderPassDescriptor,
                                yTexture: MTLTexture,
                                cbcrTexture: MTLTexture,

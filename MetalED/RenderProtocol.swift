@@ -9,5 +9,5 @@
 import MetalPerformanceShaders
 
 protocol RenderProtocol {
-    func encodeToBuffer(commandBuffer: MTLCommandBuffer, renderDescriptor: MTLRenderPassDescriptor, inTexture: MTLTexture, outTexture: MTLTexture);
+    func encodeToBuffer(_ commandBuffer: MTLCommandBuffer, renderDescriptor: MTLRenderPassDescriptor, inTexture: MTLTexture, outTexture: MTLTexture);
 }

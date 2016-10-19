@@ -13,10 +13,10 @@ struct Directory {
     let path: String
     
     func deleteAll() throws {
-        let dir = try NSFileManager.defaultManager().contentsOfDirectoryAtPath(path)
+        let dir = try FileManager.default.contentsOfDirectory(atPath: path)
         try dir.forEach { file in
             let pathString = String.init(format: "%@%@", NSTemporaryDirectory(), file)
-            try NSFileManager.defaultManager().removeItemAtPath(pathString)
+            try FileManager.default.removeItem(atPath: pathString)
         }
     }
     

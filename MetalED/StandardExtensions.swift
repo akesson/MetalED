@@ -10,7 +10,7 @@ import MetalPerformanceShaders
 
 extension Dictionary {
     
-    mutating func lookupOrAdd(key: Key, add: () -> Value) -> Value {
+    mutating func lookupOrAdd(_ key: Key, add: () -> Value) -> Value {
         if let val = self[key] {
             return val
         } else {
@@ -23,7 +23,7 @@ extension Dictionary {
 
 extension MPSUnaryImageKernel : RenderProtocol {
     
-    func encodeToBuffer(commandBuffer: MTLCommandBuffer, renderDescriptor: MTLRenderPassDescriptor, inTexture: MTLTexture, outTexture: MTLTexture) {
-        encodeToCommandBuffer(commandBuffer, sourceTexture: inTexture, destinationTexture: outTexture)
+    func encodeToBuffer(_ commandBuffer: MTLCommandBuffer, renderDescriptor: MTLRenderPassDescriptor, inTexture: MTLTexture, outTexture: MTLTexture) {
+        encode(commandBuffer: commandBuffer, sourceTexture: inTexture, destinationTexture: outTexture)
     }
 }

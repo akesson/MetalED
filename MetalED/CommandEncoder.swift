@@ -17,19 +17,19 @@ class CommandEncoder: Encoder {
         super.init(name: kernelName, threadsPerThreadgroup: threadsPerThreadgroup)
     }
     
-    func encodeToCommandBuffer(commandBuffer: MTLCommandBuffer,
+    func encodeToCommandBuffer(_ commandBuffer: MTLCommandBuffer,
                                       textures: [MTLTexture],
                                       buffers: [MTLBuffer],
                                       threadgroupsPerGrid: MTLSize) {
         // Set up and dispatch the work
-        let commandEncoder = commandBuffer.computeCommandEncoder()
+        let commandEncoder = commandBuffer.makeComputeCommandEncoder()
         commandEncoder.pushDebugGroup("Dispatch \(name) kernel")
         commandEncoder.setComputePipelineState(computePipelineState)
-        for (index, buffer) in buffers.enumerate() {
-            commandEncoder.setBuffer(buffer, offset: 0, atIndex: index)
+        for (index, buffer) in buffers.enumerated() {
+            commandEncoder.setBuffer(buffer, offset: 0, at: index)
         }
-        for (index,texture) in textures.enumerate() {
-            commandEncoder.setTexture(texture, atIndex: index)
+        for (index,texture) in textures.enumerated() {
+            commandEncoder.setTexture(texture, at: index)
         }
         commandEncoder.dispatchThreadgroups(threadgroupsPerGrid, threadsPerThreadgroup: threadsPerThreadgroup)
         commandEncoder.popDebugGroup()

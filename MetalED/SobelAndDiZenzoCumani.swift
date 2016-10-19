@@ -8,7 +8,7 @@
 
 import MetalPerformanceShaders
 
-public class SobelAndDiZenzoCumaniKernel: MPSUnaryImageKernel {
+open class SobelAndDiZenzoCumaniKernel: MPSUnaryImageKernel {
     
     let commandEncoder:CommandEncoder
     
@@ -17,7 +17,7 @@ public class SobelAndDiZenzoCumaniKernel: MPSUnaryImageKernel {
         super.init(device: GPU.device)
     }
     
-    public override func encodeToCommandBuffer(commandBuffer: MTLCommandBuffer,
+    open override func encode(commandBuffer: MTLCommandBuffer,
                                                sourceTexture: MTLTexture,
                                                destinationTexture destTexture: MTLTexture) {
         

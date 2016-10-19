@@ -16,8 +16,8 @@ class RenderTarget {
         self.texture = texture
         self.descriptor = MTLRenderPassDescriptor()
         descriptor.colorAttachments[0].texture = texture
-        descriptor.colorAttachments[0].loadAction = .DontCare
-        descriptor.colorAttachments[0].storeAction = .Store
+        descriptor.colorAttachments[0].loadAction = .dontCare
+        descriptor.colorAttachments[0].storeAction = .store
     }
     
     init(_ texture: MTLTexture, _ descriptor: MTLRenderPassDescriptor) {

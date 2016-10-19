@@ -21,20 +21,20 @@ class RenderEncoder: Encoder {
         
         let bilinear = MTLSamplerDescriptor()
         bilinear.label = "bilinear"
-        bilinear.minFilter = .Linear
-        bilinear.magFilter = .Linear
+        bilinear.minFilter = .linear
+        bilinear.magFilter = .linear
         samplerStates = [nearest, bilinear].map {GPU.newSamplerState($0)}
         super.init(name: renderName, threadsPerThreadgroup: threadsPerThreadgroup)
 
     }
     
-    func encodeToRenderBuffer(commandBuffer: MTLCommandBuffer,
+    func encodeToRenderBuffer(_ commandBuffer: MTLCommandBuffer,
                               descriptor: MTLRenderPassDescriptor,
                               textures: [MTLTexture],
                               fragmentBuffers: [MTLBuffer],
                               threadgroupsPerGrid: MTLSize) {
         
-        let renderEncoder = commandBuffer.renderCommandEncoderWithDescriptor(descriptor)
+        let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: descriptor)
         
         renderEncoder.pushDebugGroup(name)
         renderEncoder.label = name
@@ -43,18 +43,18 @@ class RenderEncoder: Encoder {
         //renderEncoder.setViewport(view)  //MTLViewport only last render
         
         renderEncoder.setRenderPipelineState(renderPipelineState)
-        renderEncoder.setVertexBuffer(FullScreenVertexes.buffer, offset: 0, atIndex: 0)
-        for (index, buffer) in fragmentBuffers.enumerate() {
-            renderEncoder.setFragmentBuffer(buffer, offset: 0, atIndex: index)
+        renderEncoder.setVertexBuffer(FullScreenVertexes.buffer, offset: 0, at: 0)
+        for (index, buffer) in fragmentBuffers.enumerated() {
+            renderEncoder.setFragmentBuffer(buffer, offset: 0, at: index)
         }
-        for (index, texture) in textures.enumerate() {
-            renderEncoder.setFragmentTexture(texture, atIndex: index)
+        for (index, texture) in textures.enumerated() {
+            renderEncoder.setFragmentTexture(texture, at: index)
         }
-        for (index, samplerState) in samplerStates.enumerate() {
+        for (index, samplerState) in samplerStates.enumerated() {
             //the sampler states are always set, it's up to the shaders if they use them or not
-            renderEncoder.setFragmentSamplerState(samplerState, atIndex: index)
+            renderEncoder.setFragmentSamplerState(samplerState, at: index)
         }
-        renderEncoder.drawPrimitives(.Triangle, vertexStart: 0, vertexCount: 6, instanceCount: 1)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 6, instanceCount: 1)
         renderEncoder.popDebugGroup()
         renderEncoder.endEncoding()
     }

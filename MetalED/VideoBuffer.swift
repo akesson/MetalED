@@ -17,7 +17,7 @@ class VideoBuffer: CameraCaptureDelegate {
     var cbcrTexture: MTLTexture?
     var frameNumber = 0
     
-    var videoTextureCache : Unmanaged<CVMetalTextureCacheRef>?
+    var videoTextureCache : CVMetalTextureCache?
     
     init() {
         let device = GPU.device
@@ -28,43 +28,40 @@ class VideoBuffer: CameraCaptureDelegate {
         CVMetalTextureCacheCreate(kCFAllocatorDefault, nil, device, nil, &videoTextureCache)
     }
     
-    func captureBuffer(sampleBuffer: CMSampleBuffer!, frameNumber: Int) {
+    func captureBuffer(_ sampleBuffer: CMSampleBuffer!, frameNumber: Int) {
         self.frameNumber = frameNumber
         let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
         
         // Y: luma
-        var yTextureRef : Unmanaged<CVMetalTextureRef>?
+        var yTextureRef : CVMetalTexture? = nil
         
         let yWidth = CVPixelBufferGetWidthOfPlane(pixelBuffer!, 0);
         let yHeight = CVPixelBufferGetHeightOfPlane(pixelBuffer!, 0);
         
         CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault,
-                                                  videoTextureCache!.takeUnretainedValue(),
+                                                  videoTextureCache!,
                                                   pixelBuffer!,
                                                   nil,
-                                                  MTLPixelFormat.R8Unorm,
+                                                  MTLPixelFormat.r8Unorm,
                                                   yWidth, yHeight, 0,
                                                   &yTextureRef)
         
         // CbCr: Cb and Cr are the blue-difference and red-difference chroma components /
         
-        var cbcrTextureRef : Unmanaged<CVMetalTextureRef>?
+        var cbcrTextureRef : CVMetalTexture? = nil
         
         let cbcrWidth = CVPixelBufferGetWidthOfPlane(pixelBuffer!, 1);
         let cbcrHeight = CVPixelBufferGetHeightOfPlane(pixelBuffer!, 1);
         
         CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault,
-                                                  videoTextureCache!.takeUnretainedValue(),
+                                                  videoTextureCache!,
                                                   pixelBuffer!,
                                                   nil,
-                                                  MTLPixelFormat.RG8Unorm,
+                                                  MTLPixelFormat.rg8Unorm,
                                                   cbcrWidth, cbcrHeight, 1,
                                                   &cbcrTextureRef)
         
-        yTexture = CVMetalTextureGetTexture((yTextureRef?.takeUnretainedValue())!)
-        cbcrTexture = CVMetalTextureGetTexture((cbcrTextureRef?.takeUnretainedValue())!)
-        
-        yTextureRef?.release()
-        cbcrTextureRef?.release()
+        yTexture = CVMetalTextureGetTexture(yTextureRef!)
+        cbcrTexture = CVMetalTextureGetTexture(cbcrTextureRef!)
     }
 }

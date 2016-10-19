@@ -12,7 +12,7 @@ import UIKit
 class CameraViewController: UIViewController {
 
     let camera = CameraController()
-    let videoView = VideoView(frame: CGRectZero)
+    let videoView = VideoView(frame: CGRect.zero)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +29,8 @@ class CameraViewController: UIViewController {
         print("frame: \(videoView.frame) drawableSize: \(videoView.drawableSize)")
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return .LandscapeLeft
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return .landscapeLeft
     }
 }
 
